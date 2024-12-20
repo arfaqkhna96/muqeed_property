@@ -1,3 +1,5 @@
+from tokenize import String
+
 from odoo import fields, models, api
 
 
@@ -8,32 +10,25 @@ class MyProperty(models.Model):
     name = fields.Char(string="Property Name", required=True, )
     description = fields.Text(string="Description")
     property_type = fields.Selection([('vacant_land','Vacant Land'),('villa','Villa'),('house','House'),('commercial_space','Commercial Space')],string="Property Type")
+    city = fields.Char(string="City")
     sales_type = fields.Selection([('sale', 'Sale'), ('rent', 'Rent')],string="Sales Type",default='sale')
-    utilities = fields.Boolean(string="Utilities", default=False)
-    electric_meter = fields.Boolean(string=" Electric Meter", default=False)
-    water_meter = fields.Boolean(string="Water Meter", default=False)
-    generator = fields.Boolean(string=" Generator", default=False)
-    solar_water_heater = fields.Boolean(string="Solar Water Heater", default=False)
-    amount = fields.Float(string="Amount")
+    property_area = fields.Char(string="Property Area")
+    bedrooms = fields.Selection([('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6')],string="Bedrooms",default='1')
+    bathrooms = fields.Selection([('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6')],
+                                string="Bathrooms", default='1')
+    availability = fields.Boolean(string="Availability", default=False)
+    balcony = fields.Selection([('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6')],string="Balcony",default='1')
+    amount = fields.Integer(string="Amount")
+    address = fields.Text(string="Address")
+
+    features_ids=    fields.Many2many('property.features',String="Features")
 
     video_file = fields.Binary(string="Upload Video", max_width=1024, max_height=1024)
 
     image_ids = fields.One2many(
         'property.image', 'property_id', string='Property Images')
 
-    def _process_ondelete(self):
-        _logger.info("Processing ondelete for: %s", self)
-        ondelete = (self.field.ondelete or {}).get(self.selection.value)
-        _logger.info("ondelete value: %s", ondelete)
 
-    @api.onchange('utilities')
-    def _onchange_utilities(self):
-        """Reset utility fields when 'utilities' is deselected"""
-        if not self.utilities:
-            self.electric_meter = False
-            self.water_meter = False
-            self.generator = False
-            self.solar_water_heater = False
 
     def _compute_property_image_name(self):
         for record in self:
@@ -51,3 +46,8 @@ class BranchImage(models.Model):
 
     property_id = fields.Many2one('my.property', string='Property', required=True)
     image = fields.Binary('Image', required=True, help="Upload an image for the property.")
+
+class Features(models.Model):
+    _name = 'property.features'
+    _description = 'Property Features'
+    name= fields.Char(string="Features")

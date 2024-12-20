@@ -3,3 +3,4 @@ muqeed_property.access_my_property,access_my_property,muqeed_property.model_my_p
 muqeed_property.access_agent_details,access_agent_details,muqeed_property.model_agent_details,base.group_user,1,1,1,1
 muqeed_property.access_property_image,access_property_image,muqeed_property.model_property_image,base.group_user,1,1,1,1
 muqeed_property.access_property_image_public,access_property_image_public,muqeed_property.model_property_image,base.group_public,1,0,0,0
+muqeed_property.access_property_features,access_property_features,muqeed_property.model_property_features,base.group_user,1,1,1,1

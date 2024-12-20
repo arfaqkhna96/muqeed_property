@@ -56,39 +56,6 @@
                         outline: none; /* Remove outline */
                         }
 
-                        /* Slider Styles */
-                        .slider-container-price, .slider-container-area {
-                        position: relative;
-                        width: 100%;
-                        height: 8px;
-                        background-color: #ccc; /* Light gray background */
-                        border-radius: 4px; /* Rounded corners */
-                        margin-top: 10px; /* Margin */
-                        }
-
-                        .slider-track-price, .slider-track-area {
-                        position: absolute;
-                        top: 0;
-                        height: 100%;
-                        background-color: #28a745; /* Green track */
-                        border-radius: 4px; /* Rounded corners */
-                        }
-
-                        .slider-handle {
-                        position: absolute;
-                        top: -6px; /* Position above the track */
-                        width: 18px; /* Handle width */
-                        height: 18px; /* Handle height */
-                        background-color: #fff; /* White handle */
-                        border: 2px solid #28a745; /* Green border */
-                        border-radius: 50%; /* Circular handle */
-                        cursor: pointer; /* Pointer cursor */
-                        transition: transform 0.3s ease; /* Smooth transition */
-                        }
-
-                        .slider-handle:hover {
-                        transform: scale(1.2); /* Slightly enlarge on hover */
-                        }
 
                         /* Card Styles */
                         .card {
@@ -558,12 +525,12 @@
                                                     <!-- Navigation Buttons -->
                                                     <button class="carousel-control-prev" type="button"
                                                         t-att-data-bs-target="'#carousel-property-' + str(property.id)" data-bs-slide="prev">
-                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"/>
                                                         <span class="visually-hidden">Previous</span>
                                                     </button>
                                                     <button class="carousel-control-next" type="button"
                                                         t-att-data-bs-target="'#carousel-property-' + str(property.id)" data-bs-slide="next">
-                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"/>
                                                         <span class="visually-hidden">Next</span>
                                                     </button>
                                                 </div>
@@ -589,7 +556,7 @@
                                                             <strong>Amount: ₹</strong>
                                                             <t t-esc="property.amount" />
                                                         </li>
-                                                        <li t-if="property.utilities">
+                                                        <li t-if="property.features_ids">
                                                             <strong>Utilities Available</strong>
                                                         </li>
                                                     </ul>
@@ -600,7 +567,6 @@
                                 </t>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </t>

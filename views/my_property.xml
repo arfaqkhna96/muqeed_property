@@ -8,10 +8,16 @@
             <list>
                 <field name="name"/>
                 <field name="description"/>
+                <field name="property_area"/>
                 <field name="property_type"/>
                 <field name="sales_type"/>
-                <field name="utilities"/>
+                <field name="bedrooms"/>
+                <field name="bathrooms"/>
+                <field name="balcony"/>
+                <field name="features_ids"/>
+                <field name="city"/>
                 <field name="amount"/>
+                <field name="availability"/>
 
             </list>
         </field>
@@ -27,21 +33,24 @@
                     <group>
                         <field name="name"/>
                         <field name="description"/>
+                        <field name="property_area"/>
                         <field name="property_type"/>
                         <field name="sales_type"/>
-                        <field name="utilities"/>
-                        <field name="electric_meter" invisible="utilities == False"/>
-                        <field name="water_meter" invisible="utilities == False"/>
-                        <field name="generator" invisible="utilities == False"/>
-                        <field name="solar_water_heater" invisible="utilities == False"/>
+                        <field name="bedrooms"/>
+                        <field name="bathrooms"/>
+                        <field name="balcony"/>
+                        <field name="features_ids" widget="many2many_tags"/>
+                        <field name="city"/>
+                        <field name="address"/>
                         <field name="amount"/>
                         <field name="video_file"/>
+                        <field name="availability"/>
                     </group>
                     <!-- Image Management -->
                     <group string="Property Images">
                         <field name="image_ids">
                             <list string="Property Images">
-                                <field name="image" widget="image" string="Image"/>
+                                <field name="image" widget="many2one_tags" string="Image"/>
                             </list>
                         </field>
                     </group>
@@ -60,7 +69,7 @@
     <menuitem
             id="my_property_menu"
             name="My Property"
-            sequence="100"
+            sequence="1"
             parent="estate_main_menu"
             action="action_estate_property"
     />

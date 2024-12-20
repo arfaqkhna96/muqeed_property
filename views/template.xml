@@ -244,7 +244,7 @@
                 </div>
             </div>
             <div class="container py-5">
-                <h1 class="mb-5 text-center">Available Real Estate Properties</h1>
+                <h1 class="mb-5 text-center">Available Properties</h1>
                 <div class="row g-4">
                     <t t-foreach="properties" t-as="property">
                         <div class="col-lg-4 col-md-6">

@@ -251,6 +251,53 @@
                 transition: transform 0.1s ease-in-out;
                 }
 
+                /* Mobile Filter Menu */
+                #mobileFilterMenu {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Initially hidden off-screen */
+                width: 100%;
+                height: 100%;
+                background-color: #fff;
+                z-index: 1050;
+                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+                transition: right 0.3s ease-in-out; /* Sliding effect */
+                overflow-y: auto;
+                }
+
+                /* Open state for the filter menu */
+                #mobileFilterMenu.open {
+                right: 0; /* Slide into view */
+                }
+
+                /* Trigger Button for Mobile */
+                #mobileFilterToggle {
+                z-index: 1100;
+                }
+
+                /* Close Button */
+                #closeMobileFilterMenu {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                }
+                .filter-header{
+                background-color:#4650BD;
+                }
+                /* Ensure it's hidden on larger screens */
+                @media (min-width: 768px) {
+                #mobileFilterMenu {
+                display: none;
+                }
+                #mobileFilterToggle {
+                display: none;
+                }
+                }
+                @media (max-width: 768px) {
+                .filter-container{
+                display:none;
+                }
+                }
 
 
             </style>
@@ -320,6 +367,39 @@
                 updatePriceSlider(); // Initial update
                 });
 
+                document.addEventListener('DOMContentLoaded', () => {
+                const filterMenu = document.getElementById('mobileFilterMenu');
+                const filterToggle = document.getElementById('mobileFilterToggle');
+                const closeFilterMenu = document.getElementById('closeMobileFilterMenu');
+
+                // Function to open the filter menu
+                const openFilterMenu = () => {
+                filterMenu.classList.add('open');
+                filterToggle.style.display = 'none';
+                };
+
+                // Function to close the filter menu
+                const closeFilterMenuFunc = () => {
+                filterMenu.classList.remove('open');
+                filterToggle.style.display = 'block';
+                };
+                
+
+                // Event listener for the filter toggle button
+                filterToggle.addEventListener('click', openFilterMenu);
+
+                // Event listener for the close button inside the filter menu
+                closeFilterMenu.addEventListener('click', closeFilterMenuFunc);
+
+                // Optional: Close the filter menu when clicking outside of it
+                document.addEventListener('click', (e) => {
+                if (!filterMenu.contains(e.target) &amp;&amp; !filterToggle.contains(e.target)) {
+                closeFilterMenuFunc();
+                }
+                });
+                });
+
+
             </script>
 
             <div class="container hero-container">
@@ -329,7 +409,7 @@
                     <div class="col-12 col-md-6 text-center text-md-start">
                         <h1 class="fw-bold">Reality Properties Solve Your Problems</h1>
                         <p>Want to buy or rent Home?</p>
-<!--                        <button class="btn btn-primary px-4 mt-3">Submit Property</button>-->
+                        <!--                        <button class="btn btn-primary px-4 mt-3">Submit Property</button>-->
                     </div>
 
                     <!-- Filter Section -->
@@ -519,6 +599,77 @@
                     </t>
                 </div>
             </div>
+            <!-- Filter Menu for Mobile -->
+            <div id="mobileFilterMenu" class="d-md-none">
+                <div class="filter-header text-white d-flex justify-content-between align-items-center p-3">
+                    <h5 class="mb-0">Filters</h5>
+                    <button id="closeMobileFilterMenu" class="btn-close btn-close-white"/>
+                </div>
+                <div class="filter-body p-3">
+                    <h6 class="text-primary">Request Exploration</h6>
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="mobileInputName" placeholder="Your Name"/>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="mobileInputEmail" placeholder="Email Address"/>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="mobileInputPhone" placeholder="Mobile Number"/>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="mobileMessage" rows="3" placeholder="Message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+                    </form>
+                    <hr/>
+                    <h6 class="text-primary">Filter</h6>
+                    <form>
+                        <div class="mb-3">
+                            <label for="mobileSalesType" class="form-label">Sales Type</label>
+                            <select class="form-select" id="mobileSalesType" onchange="handleSalesTypeChange(this)">
+                                <option value="all">All Properties</option>
+                                <option value="rent">For Rent</option>
+                                <option value="sale">For Sale</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="mobilePropertyType" class="form-label">Property Type</label>
+                            <select class="form-select" id="mobilePropertyType"
+                                    onchange="handlePropertyTypeChange(this)">
+                                <option value="all">All Properties</option>
+                                <option value="vacant_land">Vacant Land</option>
+                                <option value="villa">Villa</option>
+                                <option value="house">House</option>
+                                <option value="commercial_space">Commercial Space</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="mobilePriceRange" class="form-label">Price Range:</label>
+                            <div class="d-flex justify-content-between">
+                                <span id="mobilePriceStartLabel">₹0</span>
+                                <span id="mobilePriceEndLabel">₹1,00,000</span>
+                            </div>
+                            <div class="slider-container-price">
+                                <div class="slider-track-price"></div>
+                                <div class="slider-handle" id="mobileHandleMin" style="left: 0;"></div>
+                                <div class="slider-handle" id="mobileHandleMax" style="left: 100%;"></div>
+                                <input type="hidden" id="mobilePriceStart" value="0"/>
+                                <input type="hidden" id="mobilePriceEnd" value="100000"/>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="handleSubmit(event)" class="btn btn-primary w-100">
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Trigger Button for Mobile -->
+            <button id="mobileFilterToggle" class="btn btn-primary d-md-none position-fixed bottom-0 end-0 m-3">
+                Filters
+            </button>
 
         </t>
     </template>

@@ -16,6 +16,7 @@ class PropertyResale(http.Controller):
                                   'properties': properties
                               })
 
+
 class Properties(http.Controller):
     @http.route('/properties', auth='public', website=True)
     def properties(self, sales=None, prop=None, min=None, max=None, **kwargs):
@@ -62,3 +63,41 @@ class PropertyDetailController(http.Controller):
             'properties': properties
         })
 
+
+class PropertyController(http.Controller):
+
+    @http.route('/properties/rent', type='http', auth='public', website=True)
+    def properties_rent(self, **kwargs):
+        properties = request.env['my.property'].search([('sales_type', '=', 'rent')])
+        return request.render('muqeed_property.my_property_template', {
+            'properties': properties,
+            'filter_type': 'rent'
+        })
+
+    @http.route('/properties/sale', type='http', auth='public', website=True)
+    def properties_sale(self, **kwargs):
+        properties = request.env['my.property'].search([('sales_type', '=', 'sale')])
+        return request.render('muqeed_property.my_property_template', {
+            'properties': properties,
+            'filter_type': 'sale'
+        })
+
+    @http.route('/properties/max_amount', type='json', auth='public')
+    def get_max_amount(self):
+        max_amount = request.env['my.property'].sudo().search([], limit=1, order='amount desc').amount
+        return {'max_amount': max_amount or 0}
+
+
+class MyPropertyController(http.Controller):
+
+    @http.route('/properties/type/<string:property_type>', type='http', auth='public', website=True)
+    def properties_by_type(self, property_type, **kwargs):
+        if property_type == 'all':
+            properties = request.env['my.property'].search([])
+        else:
+            properties = request.env['my.property'].search([('property_type', '=', property_type)])
+
+        return request.render('muqeed_property.my_property_template', {
+            'properties': properties,
+            'selected_property_type': property_type  # Pass the selected property type
+        })

@@ -166,209 +166,245 @@
                 text-transform: uppercase; /* Converts all text to uppercase */
                 letter-spacing: 2px; /* Adds extra space between letters */
                 }
-                /* Hero Section */
-                .hero {
-                text-align: center;
-                padding: 20px;
-                background-image: url('http://propertyresale.in/assets/images/layout/playing.svg');
+
+<!--                neeraj-->
+                body {
+                background-image:
+                url('https://res.cloudinary.com/drw030kab/image/upload/v1734595313/xuouyzyqlsisnscszz33.png');
                 background-size: cover;
-                background-position: center;
                 background-repeat: no-repeat;
-                height: 100vh; /* Full viewport height */
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                color: white; /* Text color to contrast the background */
                 }
-
-                .hero h1 {
-                font-size: 2.5rem;
-                margin-bottom: 10px;
-                text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
+                option {
+                background-color: rgb(0,0,0,0.4);
                 }
-
-                .hero p {
-                font-size: 1.2rem;
-                margin-bottom: 20px;
-                text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.7);
-                }
-
-                .buttons {
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-                flex-wrap: wrap;
-                margin-bottom: 20px;
-                }
-
-                .buttons button {
-                padding: 10px 20px;
-                font-size: 1rem;
-                border: none;
-                background-color: rgba(0, 123, 255, 0.9);
+                .hero-container {
                 color: white;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                }
-
-                .buttons button:hover {
-                background-color: rgba(0, 86, 179, 0.9);
-                transform: scale(1.05);
-                }
-
-                .search-bar {
-                display: flex;
-                justify-content: center;
-                gap: 10px;
-                flex-wrap: wrap;
-                margin-top: 20px;
-                }
-
-                .search-bar input,
-                .search-bar select {
-                padding: 10px;
-                font-size: 1rem;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                width: 200px;
-                }
-
-                .search-bar button {
-                padding: 10px 20px;
-                font-size: 1rem;
-                border: none;
-                background-color: rgba(40, 167, 69, 0.9);
-                color: white;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                }
-
-                .search-bar button:hover {
-                background-color: rgba(33, 136, 56, 0.9);
-                transform: scale(1.05);
-                }
-
-                /* Responsive Styles */
-                @media (max-width: 768px) {
-                .hero h1 {
-                font-size: 2rem;
-                }
-
-                .hero p {
-                font-size: 1rem;
-                }
-
-                .buttons button {
-                width: 100%;
-                max-width: 150px;
-                padding: 10px;
-                font-size: 0.9rem;
-                }
-
-                .search-bar {
-                flex-direction: column;
-                gap: 15px;
-                }
-
-                .search-bar input,
-                .search-bar select,
-                .search-bar button {
-                width: 100%;
-                max-width: 300px;
-                }
-                }
-                .hero {
-                position: relative;
-                text-align: center;
                 padding: 20px;
-                background: none; /* Remove the direct background image */
-                height: 100vh;
+                position: relative;
                 display: flex;
-                flex-direction: column;
-                justify-content: center;
+                min-height: 100vh;
+                flex-direction: row;
+                justify-content: space-between;
                 align-items: center;
-                color: white;
-                overflow: hidden; /* Ensure pseudo-element doesn't affect layout */
+                gap: 20px;
                 }
 
-                /* Pseudo-element for the blurred background image */
-                .hero::before {
-                content: '';
+                .hero-overlay {
+                background-color: rgba(0, 0, 0, 0.6);
                 position: absolute;
                 top: 0;
                 left: 0;
+<!--                width: 100vw;-->
+<!--                height: 100vh;-->
+                z-index: 1;
+                }
+
+                .hero-content {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
                 width: 100%;
+                }
+
+                .filter-container {
+                flex: 1;
+                border: 1px solid black;
+                background-color: rgba(0, 0, 0, 0.4);
+                padding: 20px;
+                border-radius: 10px;
+                max-width: 400px;
+                margin: auto;
+                }
+
+                .slider-container-price {
+                position: relative;
+                width: 100%;
+                height: 8px;
+                background-color: #ccc;
+                border-radius: 4px;
+                margin-top: 10px;
+                }
+
+                .slider-track-price {
+                position: absolute;
+                top: 0;
                 height: 100%;
-                background-image: url('http://propertyresale.in/assets/images/layout/playing.svg');
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                filter: blur(5px); /* Apply blur effect */
-                z-index: -1; /* Place behind the content */
-                }
-                @media (max-width: 480px) {
-                .hero h1 {
-                font-size: 1.5rem;
+                background-color: #0275d8;
+                border-radius: 4px;
                 }
 
-                .hero p {
-                font-size: 0.9rem;
+                .slider-handle {
+                position: absolute;
+                top: -6px;
+                width: 18px;
+                height: 18px;
+                background-color: #fff;
+                border: 2px solid #0275d8;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: transform 0.3s ease;
                 }
 
-                .buttons {
-                display: none; /* Hide buttons in mobile view */
+                .slider-handle:hover {
+                transform: scale(1.2);
                 }
-
-                .search-bar input,
-                .search-bar select,
-                .search-bar button {
-                max-width: 250px;
-                }
-
-                .hero::before {
-                filter: blur(5px); /* Keep blur effect on mobile view */
-                }
-                }
+                
 
             </style>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                const priceStart = document.getElementById('priceStart');
+                const priceEnd = document.getElementById('priceEnd');
+                const handleMin = document.getElementById('handleMin');
+                const handleMax = document.getElementById('handleMax');
+                const priceStartLabel = document.getElementById('priceStartLabel');
+                const priceEndLabel = document.getElementById('priceEndLabel');
 
-            <section class="hero">
-                <h1>Luxury Apartment</h1>
-                <p>Limited time offer. Hurry up!!</p>
-                <div class="buttons">
-                    <button onclick="alert('Buy properties!')">Buy</button>
-                    <button onclick="alert('Rent properties!')">Rent</button>
-                    <button onclick="alert('Lease properties!')">Lease</button>
-                    <button onclick="alert('PMS services!')">PMS</button>
+                const sliderContainerPrice = document.querySelector('.slider-container-price');
+                const sliderTrackPrice = document.querySelector('.slider-track-price');
+
+                let isDraggingMin = false;
+                let isDraggingMax = false;
+
+                function updatePriceSlider() {
+                const minValue = parseInt(priceStart.value);
+                const maxValue = parseInt(priceEnd.value);
+                const total = 11000;
+
+                handleMin.style.left = ${(minValue / total) * 100}%;
+                handleMax.style.left = ${(maxValue / total) * 100}%;
+
+                sliderTrackPrice.style.left = ${(minValue / total) * 100}%;
+                sliderTrackPrice.style.width = ${((maxValue - minValue) / total) * 100}%;
+
+                priceStartLabel.textContent = ₹${minValue};
+                priceEndLabel.textContent = ₹${maxValue};
+                }
+
+                function handleMouseMove(e, isMinHandle) {
+                const rect = sliderContainerPrice.getBoundingClientRect();
+                const offsetX = e.clientX - rect.left;
+                const percentage = Math.min(Math.max(0, offsetX / rect.width), 1);
+                const newValue = Math.round(percentage * 11000);
+
+                if (isMinHandle) {
+                if (newValue &lt; parseInt(priceEnd.value)) {
+                priceStart.value = newValue;
+                updatePriceSlider();
+                }
+                } else {
+                if (newValue > parseInt(priceStart.value)) {
+                priceEnd.value = newValue;
+                updatePriceSlider();
+                }
+                }
+                }
+
+                handleMin.addEventListener('mousedown', () => (isDraggingMin = true));
+                handleMax.addEventListener('mousedown', () => (isDraggingMax = true));
+
+                window.addEventListener('mousemove', (e) => {
+                if (isDraggingMin) handleMouseMove(e, true);
+                if (isDraggingMax) handleMouseMove(e, false);
+                });
+
+                window.addEventListener('mouseup', () => {
+                isDraggingMin = false;
+                isDraggingMax = false;
+                });
+
+                updatePriceSlider(); // Initial update
+                });
+            </script>
+
+            <div class="container hero-container">
+                <div class="hero-overlay"></div>
+                <div class="row hero-content">
+                    <!-- Header Section -->
+                    <div class="col-12 col-md-6 text-center text-md-start">
+                        <h1 class="fw-bold">Reality Properties Solve Your Problems</h1>
+                        <p>Want to buy or rent Home?</p>
+                        <button class="btn btn-primary px-4 mt-3">Submit Property</button>
+                    </div>
+
+                    <!-- Filter Section -->
+                    <div class="col-12 col-md-6 filter-container">
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <label for="status" class="form-label text-white">Property Status</label>
+                                <select id="status" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Property Status</option>
+                                    <option>For Rent</option>
+                                    <option>For Sale</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="type" class="form-label text-white">Property Type</label>
+                                <select id="type" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Property Type</option>
+                                    <option>Apartment</option>
+                                    <option>Family House</option>
+                                    <option>Cottage</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="rooms" class="form-label text-white">Max Rooms</label>
+                                <select id="rooms" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Max Rooms</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <!-- Bed and Bath side by side -->
+                            <div class="col-md-6 mb-2">
+                                <label for="beds" class="form-label text-white">Bed</label>
+                                <select id="beds" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Bed</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="bath" class="form-label text-white">Bath</label>
+                                <select id="bath" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Bath</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Price Range:</label>
+                                <div class="d-flex justify-content-between">
+                                    <span id="priceStartLabel">₹0</span>
+                                    <span id="priceEndLabel">₹11,000</span>
+                                </div>
+                                <div class="slider-container-price">
+                                    <div class="slider-track-price"></div>
+                                    <div class="slider-handle" id="handleMin" style="left: 0;"></div>
+                                    <div class="slider-handle" id="handleMax" style="left: 100%;"></div>
+                                    <input type="hidden" id="priceStart" value="0"/>
+                                    <input type="hidden" id="priceEnd" value="11000"/>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center mt-2">
+                                <button class="btn btn-primary w-100 text-white" style="border-radius: 7px;">Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="search-bar">
-                    <input type="text" placeholder="Search your location"/>
-                    <select>
-                        <option>Property Type</option>
-                        <option>Apartment</option>
-                        <option>House</option>
-                        <option>Villa</option>
-                    </select>
-                    <select>
-                        <option>Bed</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                    <select>
-                        <option>Bath</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                    <button onclick="alert('Searching...')">Search</button>
-                </div>
-            </section>
+            </div>
 
             <div class="container py-5">
                 <h2 class="mb-5 text-left">Available Properties</h2>

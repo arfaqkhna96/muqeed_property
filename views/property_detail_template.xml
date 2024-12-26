@@ -4,442 +4,731 @@
             <t t-call="website.layout">
                 <xpath expr="." position="inside">
                     <style>
-                        /* Price Range Slider */
-                        .slider-container-price {
+                        body {
+                        font-family: Montserrat, sans-serif;
+                        margin: 0;
+                        padding: 0;
+                        background-color: #f9f9f9;
+                        }
+                        .card{
+                        background-color: #fff; /* White background */
+                        padding: 0px; /* Padding */
+                        border-radius: 8px; /* Rounded corners */
+                        transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth
+                        transitions
+                        */
+                        box-shadow: 4px 4px 10px rgba(128, 128, 128, 0.3);
+                        }
+
+                        .card:hover {
+                        background-color: #f9f9f9; /* Light background on hover */
+                        box-shadow: 16px 16px 40px rgba(128, 128, 128, 0.5); /* More visible shadow on hover */
+                        transform: scale(1.05);
+                        }
+
+                        .card:hover .card-title {
+                        color: #2c2d96 !important; /* Change title color on hover */
+                        }
+                        .card .price{
+                        color: #2c2d96 !important; /* Change title color on hover */
+                        }
+
+                        .card.card-title {
+                        transition: color 0.5s ease; /* Smooth transition for title color */
+                        }
+
+                        .icon-container .icon-item {
+                        display: flex;
+                        flex-direction:row;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%; /* Fixed width for consistent spacing */
+                        }
+
+                        .icon-container .icon-item svg {
+
+                        margin-bottom: 5px; /* Space between icon and label */
+                        }
+                        .card:hover .icon-item svg{
+                        color: #2c2d96; /* Icon color */
+                        }
+
+                        .icon-container .icon-item p {
+                        font-size: 16px; /* Label size */
+                        color: #555; /* Label color */
+                        }
+
+                        .icon-container .icon-item + .icon-item {
+                        padding-left: 5px;
+                        padding-right: 5px;/* Space between icons */
+                        }
+                        .sale_type {
+                        position: absolute;
+                        top: 15px;
+                        left: 80%;
+                        background-color:#f2353c; /* Semi-transparent background */
+                        color: white;
+                        font-size: 12px;
+                        font-weight: bold;
+                        padding: 5px 15px;
+                        border-radius: 7px;
+                        z-index: 10; /* Ensure it appears above the carousel images */
+                        text-transform: capitalize; /* Optional: Make the text title-case */
+                        }
+
+
+                        /* Carousel Container */
+                        .carousel {
                         position: relative;
-                        width: 100%;
-                        height: 10px;
-                        background-color: #ccc;
-                        margin-top: 10px;
                         }
 
-                        .slider-track-price {
+                        /* Navigation Buttons */
+                        .custom-carousel-control {
                         position: absolute;
-                        top: 0;
-                        height: 10px;
-                        background-color: #28a745;
-                        }
-
-                        .slider-handle {
-                        position: absolute;
-                        top: -5px;
+                        filter: none;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: #ffffff;
+                        background-color:#2c2d96; /* Background with opacity */
+                        border: none;
+                        border-radius: 50%;
+                        padding:5px;
                         width: 20px;
                         height: 20px;
-                        background-color:#28a745;
-                        border-radius: 50%;
+                        display: none; /* Initially hidden */
+                        justify-content: center;
+                        align-items: center;
                         cursor: pointer;
+                        transition: all 0.3s ease;
                         }
 
-                        /* Area Range Slider */
-                        .slider-container-area {
-                        position: relative;
+                        .custom-carousel-control .custom-icon {
+                        color: #ffffff; /* White arrow */
+                        font-size: 24px;
+                        font-weight: 900;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        }
+
+                        /* Show buttons on hover */
+                        .card:hover .custom-carousel-control {
+                        display: flex;
+                        }
+
+                        /* Position for Prev/Next Buttons */
+                        .carousel-control-prev {
+
+                        left: 10px;
+                        }
+
+                        .carousel-control-next {
+                        right: 10px;
+                        }
+
+                        /* Button Hover Effect */
+                        .custom-carousel-control:hover {
+                        background-color: #2c2d96; /* Darker shade on hover */
+                        }
+
+                        /* Carousel Image Styling */
+                        .carousel img {
+                        object-fit: cover;
                         width: 100%;
-                        height: 10px;
-                        background-color: #ccc;
-                        margin-top: 10px;
+                        height: 250px;
+                        }
+                        .details{
+                        display:flex;
+                        padding: 5px 10px;
+                        border: 1px dotted black;
+                        border-radius: 20px;
+
+
+                        justify-content:center;
+                        align-item:center;
                         }
 
-                        .slider-track-area {
-                        position: absolute;
+                        .card :hover .details{
+                        background-color: #b6b7fa;
+                        border:1px dotted #2c2d96;
+                        transition: all 0.1s ease;
+                        }
+                        .card:hover.detail_nav{
+                        color: #2c2d96 !important;
+                        }
+                        .date{
+                        display: flex;
+                        font-size:16px;
+                        font-weight:500;
+
+                        }
+                        .city {
+                        text-transform: uppercase; /* Converts all text to uppercase */
+                        letter-spacing: 2px; /* Adds extra space between letters */
+                        }
+                        .property-carousel {
+
+                        height: 60vh;
+                        margin: 0;
+                        padding: 0;
+                        border: none;
+                        }
+
+                        .property-carousel .carousel-inner {
+                        height: 100%;
+                        }
+
+                        .property-carousel .carousel-item img {
+                        height: 100%;
+                        <!--                        width: 100%;-->
+                        object-fit: cover; /* Ensures the image covers the entire container */
+                        }
+
+                        /* Remove default padding/margin from body for fullscreen effect */
+                        body {
+                        margin: 0;
+                        padding: 0;
+                        overflow-x: hidden; /* Prevent horizontal scrolling */
+                        }
+
+                        /* Optional: Ensure carousel is at the top of the viewport */
+                        .property-carousel {
+                        position: relative;
                         top: 0;
-                        height: 10px;
-                        background-color: #28a745;
+                        left: 0;
+                        width: 100%;
+                        }
+                        .container {
+                        margin: 0;
+                        padding: 0;
+                        box-sizing: border-box;
+                        max-width: 100vw;
                         }
 
-                        .slider-handle {
-                        position: absolute;
-                        top: -5px;
-                        width: 20px;
-                        height: 20px;
-                        background-color: #28a745;
-                        border-radius: 50%;
-                        cursor: pointer;
+                        .property-details {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        margin: 20px auto;
+                        padding: 20px;
+                        max-width: 90%; /* Responsive design */
+                        border-radius: 10px;
+                        box-shadow: 2px 2px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                        transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth hover effect */
                         }
+
+                        .property-details:hover {
+                        transform: translateY(-5px); /* Lift effect on hover */
+                        box-shadow: 4px 4px 6px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+                        }
+
+                        .address {
+                        font-size: 0.95rem;
+                        color: #666; /* Muted gray */
+                        word-wrap: break-word; /* Proper text wrapping */
+                        }
+
+                        .icon-container1 {
+                        display: flex;
+                        text-muted;
+                        width: -webkit-fill-available;
+                        padding:5px 0px 5px 0px;
+                        }
+
+                        .icon-item1{
+                        display:flex;
+                        padding-right: 15px; /* Spacing between icons */
+                        }
+
+
+                        .share{
+                        font-size:12px;
+                        font-weight:600;
+                        color:white;
+                        padding:7px;
+                        border:1px dotted #ff5c40;
+                        border-radius:20px;
+                        margin-right:10px;
+                        background: linear-gradient(to right, #ff5c40, #ff8340);
+                        }
+                        .save{
+                        padding:7px;
+                        border:1px dotted black;
+                        border-radius:20px;
+                        margin-right:10px;
+                        }
+                        .print{
+                        padding:7px;
+                        border:1px dotted black;
+                        border-radius:20px;
+                        margin-right:10px;
+                        }
+                        .action-buttons{
+                        padding:5px 0px;
+                        width: -webkit-fill-available;
+
+                        }
+
+                        .property_line {
+                        display: flex;
+                        align-items: center; /* Ensures vertical alignment */
+                        justify-content: space-between; /* Ensures maximum space between sections */
+                        padding: 0px 0; /* Adds spacing around the line */
+                        width: -webkit-fill-available;
+                        }
+
+                        .property_details {
+                        display: flex;
+                        gap: 10px; /* Adds space between property name and sales type */
+                        align-items: center; /* Vertically centers content */
+                        }
+
+                        .property_name {
+                        font-weight: 700;
+                        font-size: 1.5rem;
+                        color: #333;
+                        }
+
+                        .sales_type1 {
+                        background-color: #f2353c;
+                        color: white;
+                        font-size: 0.9rem;
+                        font-weight: bold;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        text-transform: capitalize;
+                        box-shadow: 2px 4px 6px rgba(255, 0, 0, 0.8);
+                        }
+
+                        .property_price {
+                        margin-left: auto; /* Pushes the price section to the far right */
+                        text-align: right; /* Ensures content inside aligns to the right */
+                        }
+
+                        .amount {
+                        font-size: 1.5rem;
+                        color: #ff5c40;
+                        font-weight: bold;
+                        }
+
+                        .start_from {
+                        font-size: 0.8rem;
+                        color: #666; /* Muted color for secondary text */
+                        }
+
+                        /* Mobile view adjustments */
+                        @media (max-width: 768px) {
+                        <!--                        .property-details {-->
+                        <!--                        padding: 8px;-->
+                        <!--                        }-->
+
+                        .address {
+                        font-size: 0.85rem; /* Slightly smaller font for compact display */
+                        padding: 0 10px; /* Add padding for spacing on smaller screens */
+                        word-wrap: break-word; /* Ensure proper wrapping */
+                        }
+
+                        .icon-container1 {
+                        flex-wrap: wrap; /* Allow icons to wrap if necessary */
+                        padding: 5px; /* Adjust padding for compactness */
+                        }
+
+                        .icon-item1 {
+                        padding-right: 10px; /* Reduce spacing between icons */
+                        }
+
+                        .share, .save, .print {
+                        font-size: 10px; /* Smaller font for action buttons */
+                        padding: 5px; /* Reduce padding to fit buttons better */
+                        margin-right: 8px; /* Adjust margin for spacing */
+                        }
+
+                        .action-buttons {
+                        padding: 5px 0; /* Reduce vertical padding */
+                        }
+
+                        .property_line {
+                        flex-direction: column; /* Stack content for better fit */
+                        align-items: flex-start; /* Align items to the left */
+                        padding: 5px 0; /* Compact padding */
+                        gap: 5px; /* Add spacing between sections */
+                        }
+
+                        .property_details {
+                        flex-direction: column; /* Stack name and sales type vertically */
+                        align-items: flex-start; /* Align items to the left */
+                        gap: 5px; /* Adjust spacing */
+                        }
+
+                        .property_name {
+                        font-size: 1.2rem; /* Slightly smaller font for better fit */
+                        }
+
+                        .sales_type1 {
+                        font-size: 0.8rem; /* Smaller badge size */
+                        padding: 4px 8px; /* Compact padding for the badge */
+                        }
+
+                        .property_price {
+                        margin-left: 0; /* Reset margin to align properly */
+                        text-align: left; /* Align price to the left */
+                        width: 100%; /* Take full width on mobile */
+                        }
+
+                        .amount {
+                        font-size: 1.2rem; /* Reduce font size for mobile */
+                        }
+
+                        .start_from {
+                        font-size: 0.7rem; /* Smaller font for secondary text */
+                        }
+                        }
+<!--                        .navbar {-->
+<!--                        border-bottom: 1px solid #eaeaea;-->
+<!--                        }-->
+
+<!--                        .nav-link {-->
+<!--                        color: #333;-->
+<!--                        font-weight: 500;-->
+<!--                        padding: 10px 15px;-->
+<!--                        text-transform: uppercase;-->
+<!--                        }-->
+
+<!--                        .nav-link.active {-->
+<!--                        color: #ff5c40;-->
+<!--                        border-bottom: 3px solid #ff5c40;-->
+<!--                        }-->
+
+<!--                        .nav-link:hover {-->
+<!--                        color: #ff5c40;-->
+<!--                        }-->
+<!--                        .content-section {-->
+<!--                        display: none;-->
+<!--                        }-->
+<!--                        .navbar-nav {-->
+<!--                        width: 100%;-->
+<!--                        display: flex;-->
+<!--                        justify-content: space-between;-->
+<!--                        padding: 0px 10px;-->
+<!--                        }-->
+<!--                        .content-section.active {-->
+<!--                        display: block;-->
+<!--                        }-->
+
 
                     </style>
                     <script>
+<!--                        odoo.define('muqeed_property.navbar', function (require) {-->
+<!--                        "use strict";-->
 
-                        document.addEventListener('DOMContentLoaded', function () {
-                        // Price Range Slider
-                        const handleMin = document.getElementById('handleMin');
-                        const handleMax = document.getElementById('handleMax');
-                        const priceStartLabel = document.getElementById('priceStartLabel');
-                        const priceEndLabel = document.getElementById('priceEndLabel');
-                        const priceStart = document.getElementById('priceStart');
-                        const priceEnd = document.getElementById('priceEnd');
-                        const sliderContainerPrice = document.querySelector('.slider-container-price');
-                        const sliderTrackPrice = document.querySelector('.slider-track-price');
+<!--                        document.addEventListener('DOMContentLoaded', function () {-->
+<!--                        const navLinks = document.querySelectorAll('.nav-link');-->
+<!--                        const contentSections = document.querySelectorAll('.content-section');-->
 
-                        let isDraggingMin = false;
-                        let isDraggingMax = false;
-                        const sliderWidthPrice = sliderContainerPrice.offsetWidth;
+<!--                        navLinks.forEach(link => {-->
+<!--                        link.addEventListener('click', function (e) {-->
+<!--                        e.preventDefault();-->
 
-                        function updatePriceSlider() {
-                        const minValue = parseInt(priceStart.value);
-                        const maxValue = parseInt(priceEnd.value);
+<!--                        // Remove active class from all nav links-->
+<!--                        navLinks.forEach(nav => nav.classList.remove('active'));-->
+<!--                        // Add active class to the clicked link-->
+<!--                        this.classList.add('active');-->
 
-                        handleMin.style.left = `${(minValue / 11000) * 100}%`;
-                        handleMax.style.left = `${(maxValue / 11000) * 100}%`;
+<!--                        // Hide all content sections-->
+<!--                        contentSections.forEach(section => section.classList.remove('active'));-->
+<!--                        // Show the selected section-->
+<!--                        const sectionId = this.getAttribute('data-section') + '-section';-->
+<!--                        document.getElementById(sectionId).classList.add('active');-->
+<!--                        });-->
+<!--                        });-->
+<!--                        });-->
+<!--                        });-->
 
-                        sliderTrackPrice.style.left = `${(minValue / 11000) * 100}%`;
-                        sliderTrackPrice.style.width = `${((maxValue - minValue) / 11000) * 100}%`;
-
-                        priceStartLabel.textContent = `₹${minValue}`;
-                        priceEndLabel.textContent = `₹${maxValue}`;
-                        }
-
-                        handleMin.addEventListener('mousedown', () => { isDraggingMin = true; });
-                        handleMax.addEventListener('mousedown', () => { isDraggingMax = true; });
-
-                        window.addEventListener('mousemove', (e) => {
-                        if (isDraggingMin || isDraggingMax) {
-                        const sliderRect = sliderContainerPrice.getBoundingClientRect();
-                        const offsetX = e.clientX - sliderRect.left;
-                        const percentage = Math.min(Math.max(0, offsetX / sliderWidthPrice), 1);
-
-                        if (isDraggingMin) {
-                        const newMinValue = Math.round(percentage * 11000);
-                        if (newMinValue&lt; parseInt(priceEnd.value)) {
-                        priceStart.value = newMinValue;
-                        updatePriceSlider();
-                        }
-                        }
-
-                        if (isDraggingMax) {
-                        const newMaxValue = Math.round(percentage * 11000);
-                        if (newMaxValue > parseInt(priceStart.value)) {
-                        priceEnd.value = newMaxValue;
-                        updatePriceSlider();
-                        }
-                        }
-                        }
-                        });
-
-                        window.addEventListener('mouseup', () => {
-                        isDraggingMin = false;
-                        isDraggingMax = false;
-                        });
-
-                        updatePriceSlider(); // Initial update
-
-                        // Area Range Slider
-                        const handleAreaMin = document.getElementById('handleAreaMin');
-                        const handleAreaMax = document.getElementById('handleAreaMax');
-                        const areaStartLabel = document.getElementById('areaStartLabel');
-                        const areaEndLabel = document.getElementById('areaEndLabel');
-                        const areaStart = document.getElementById('areaStart');
-                        const areaEnd = document.getElementById('areaEnd');
-                        const sliderContainerArea = document.querySelector('.slider-container-area');
-                        const sliderTrackArea = document.querySelector('.slider-track-area');
-
-                        let isDraggingAreaMin = false;
-                        let isDraggingAreaMax = false;
-                        const sliderWidthArea = sliderContainerArea.offsetWidth;
-
-                        function updateAreaSlider() {
-                        const minAreaValue = parseInt(areaStart.value);
-                        const maxAreaValue = parseInt(areaEnd.value);
-
-                        handleAreaMin.style.left = `${(minAreaValue / 10000) * 100}%`;
-                        handleAreaMax.style.left = `${(maxAreaValue / 10000) * 100}%`;
-
-                        sliderTrackArea.style.left = `${(minAreaValue / 10000) * 100}%`;
-                        sliderTrackArea.style.width = `${((maxAreaValue - minAreaValue) / 10000) * 100}%`;
-
-                        areaStartLabel.textContent = `${minAreaValue} sq ft`;
-                        areaEndLabel.textContent = `${maxAreaValue} sq ft`;
-                        }
-
-                        handleAreaMin.addEventListener('mousedown', () => { isDraggingAreaMin = true; });
-                        handleAreaMax.addEventListener('mousedown', () => { isDraggingAreaMax = true; });
-
-                        window.addEventListener('mousemove', (e) => {
-                        if (isDraggingAreaMin || isDraggingAreaMax) {
-                        const sliderRect = sliderContainerArea.getBoundingClientRect();
-                        const offsetX = e.clientX - sliderRect.left;
-                        const percentage = Math.min(Math.max(0, offsetX / sliderWidthArea), 1);
-
-                        if (isDraggingAreaMin) {
-                        const newMinAreaValue = Math.round(percentage * 10000);
-                        if (newMinAreaValue&lt; parseInt(areaEnd.value)) {
-                        areaStart.value = newMinAreaValue;
-                        updateAreaSlider();
-                        }
-                        }
-
-                        if (isDraggingAreaMax) {
-                        const newMaxAreaValue = Math.round(percentage * 10000);
-                        if (newMaxAreaValue > parseInt(areaStart.value)) {
-                        areaEnd.value = newMaxAreaValue;
-                        updateAreaSlider();
-                        }
-                        }
-                        }
-                        });
-
-                        window.addEventListener('mouseup', () => {
-                        isDraggingAreaMin = false;
-                        isDraggingAreaMax = false;
-                        });
-
-                        updateAreaSlider(); // Initial update
-                        });
 
                     </script>
 
                 </xpath>
                 <div class="container">
-                    <h1 t-esc="property.name" class="my-4"/>
                     <div class="row">
-                        <div class="col-md-3">
-                            <div>
-                                <h4>Request Exploration</h4>
-                                <form>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" id="inputField1"
-                                               placeholder="Your Name"/>
+                        <div t-att-id="'carousel-property-' + str(property.id)"
+                             class="carousel slide property-carousel"
+                             data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <t t-set="counter" t-value="0"/>
+                                <t t-foreach="property.image_ids" t-as="image">
+                                    <div t-att-class="'carousel-item ' + ('active' if counter == 0 else '')">
+                                        <img t-att-src="'/web/image/property.image/%d/image' % image.id"
+                                             class="d-block w-100 h-100"
+                                             alt="Property Image"/>
                                     </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" id="inputField2"
-                                               placeholder="Email Address"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" id="inputField3"
-                                               placeholder="Mobile Number"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <textarea class="form-control" id="textAreaField" rows="3"
-                                                  placeholder="Message"/>
-                                    </div>
-                                    <button type="submit" class="btn btn-danger w-100">Submit Request</button>
-                                </form>
-                                <br/>
-                                <h4>Filter</h4>
-                                <form>
-                                    <div class="mb-3">
-                                        <select class="form-select" id="propertyStatus">
-                                            <option value="">Select Status</option>
-                                            <option value="offer_received">For Rent</option>
-                                            <option value="offer_accepted">For Sale</option>
-
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <select class="form-select" id="propertyType">
-                                            <option value="">Select Type</option>
-                                            <option value="vacant_land">Vacant Land</option>
-                                            <option value="villa">Villa</option>
-                                            <option value="house">House</option>
-                                            <option value="commercial_space">Commercial Space</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <select class="form-select" id="maxRooms">
-                                            <option value="">Select Rooms</option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <select class="form-select" id="bed">
-                                                <option value="">Select</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select>
-                                        </div>
-                                        <div class="col">
-                                            <select class="form-select" id="bath">
-                                                <option value="">Select</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 mt-3">
-                                        <select class="form-select" id="agencies">
-                                            <option value="">Select Agency</option>
-                                            <option value="agency1">Lincoln</option>
-                                            <option value="agency2">Blue Sky</option>
-                                            <option value="agency3">Premiere</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="container">
-                                        <div class="mb-3">
-                                            <label class="form-label">Price Range:</label>
-                                            <div class="d-flex justify-content-between">
-                                                <span id="priceStartLabel">₹0</span>
-                                                <span id="priceEndLabel">₹11,000</span>
-                                            </div>
-                                            <div class="slider-container-price">
-                                                <div class="slider-track-price"/>
-                                                <div class="slider-handle" id="handleMin" style="left: 0;"/>
-                                                <div class="slider-handle" id="handleMax" style="left: 100%;"/>
-                                                <input type="hidden" id="priceStart" value="0"/>
-                                                <input type="hidden" id="priceEnd" value="11000"/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container">
-                                        <div class="mb-3">
-                                            <label class="form-label">Area Range (sq ft):</label>
-                                            <div class="d-flex justify-content-between">
-                                                <span id="areaStartLabel">0</span>
-                                                <span id="areaEndLabel">10000</span>
-                                            </div>
-                                            <div class="slider-container-area">
-                                                <div class="slider-track-area"/>
-                                                <div class="slider-handle" id="handleAreaMin" style="left: 0;"/>
-                                                <div class="slider-handle" id="handleAreaMax" style="left: 100%;"/>
-                                                <input type="hidden" id="areaStart" value="0"/>
-                                                <input type="hidden" id="areaEnd" value="10000"/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-danger w-100">Search</button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="row">
-                                <div class="col">
-                                    <!-- Carousel for property images -->
-                                    <div t-att-id="'carousel-property-' + str(property.id)"
-                                         class="carousel slide"
-                                         data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <t t-set="counter" t-value="0"/>
-                                            <t t-foreach="property.image_ids" t-as="image">
-                                                <div t-att-class="'carousel-item ' + ('active' if counter == 0 else '')">
-                                                    <img t-att-src="'/web/image/property.image/%d/image' % image.id"
-                                                         class="d-block w-100"
-                                                         alt="Property Image"/>
-                                                </div>
-                                                <t t-set="counter" t-value="counter + 1"/>
-                                            </t>
-                                        </div>
-                                        <button class="carousel-control-prev" type="button"
-                                                t-att-data-bs-target="'#carousel-property-' + str(property.id)"
-                                                data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"/>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button"
-                                                t-att-data-bs-target="'#carousel-property-' + str(property.id)"
-                                                data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"/>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" height="400px">
-                                <div class="col d-flex flex-column justify-content-center align-items-center">
-                                    <p>
-                                        <strong>Description:</strong>
-                                        <t t-esc="property.description"/>
-                                    </p>
-                                    <p>
-                                        <strong>Type:</strong>
-                                        <t t-esc="property.property_type"/>
-                                    </p>
-                                    <p>
-                                        <strong>Sales Type:</strong>
-                                        <t t-esc="property.sales_type"/>
-                                    </p>
-                                    <p>
-                                        <strong>Amount:</strong>
-                                        ₹
-                                        <t t-esc="property.amount"/>
-                                    </p>
-                                    <p t-if="property.utilities">
-                                        <strong>Utilities Available</strong>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h1>Available Properties</h1>
-                            <div class="row">
-                                <t t-foreach="properties" t-as="property">
-                                    <div class="col-md-4">
-                                        <div class="card mb-4 shadow-sm">
-                                            <!-- Make the entire card clickable -->
-                                            <a t-att-href="'/property/detail/' + str(property.id)"
-                                               class="text-decoration-none">
-                                                <!-- Bootstrap Carousel -->
-                                                <div t-att-id="'carousel-property-' + str(property.id)"
-                                                     class="carousel slide"
-                                                     data-bs-ride="carousel">
-                                                    <div class="carousel-inner">
-                                                        <t t-set="counter" t-value="0"/>
-                                                        <t t-foreach="property.image_ids" t-as="image">
-                                                            <div t-att-class="'carousel-item ' + ('active' if counter == 0 else '')">
-                                                                <img t-att-src="'/web/image/property.image/%d/image' % image.id"
-                                                                     class="d-block w-100"
-                                                                     alt="Property Image"/>
-                                                            </div>
-                                                            <t t-set="counter" t-value="counter + 1"/>
-                                                        </t>
-                                                    </div>
-                                                    <button class="carousel-control-prev" type="button"
-                                                            t-att-data-bs-target="'#carousel-property-' + str(property.id)"
-                                                            data-bs-slide="prev">
-                                                        <span class="carousel-control-prev-icon" aria-hidden="true"/>
-                                                        <span class="visually-hidden">Previous</span>
-                                                    </button>
-                                                    <button class="carousel-control-next" type="button"
-                                                            t-att-data-bs-target="'#carousel-property-' + str(property.id)"
-                                                            data-bs-slide="next">
-                                                        <span class="carousel-control-next-icon" aria-hidden="true"/>
-                                                        <span class="visually-hidden">Next</span>
-                                                    </button>
-                                                </div>
-
-                                                <!-- Card Body -->
-                                                <div class="card-body">
-                                                    <h5 class="card-title">
-                                                        <t t-esc="property.name"/>
-                                                    </h5>
-                                                    <p class="card-text">
-                                                        <t t-esc="property.description"/>
-                                                    </p>
-                                                    <ul class="list-unstyled">
-                                                        <li>
-                                                            <strong>Type:</strong>
-                                                            <t t-esc="property.property_type"/>
-                                                        </li>
-                                                        <li>
-
-                                                            <strong>Sales Type:</strong>
-                                                            <t t-esc="property.sales_type"/>
-                                                        </li>
-                                                        <li>
-                                                            <strong>Amount: ₹</strong>
-                                                            <t t-esc="property.amount"/>
-                                                        </li>
-                                                        <li t-if="property.utilities">
-                                                            <strong>Utilities Available</strong>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <t t-set="counter" t-value="counter + 1"/>
                                 </t>
                             </div>
+                            <button class="carousel-control-prev" type="button"
+                                    t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"/>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"/>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="property-details">
+                        <div class="property_line">
+                            <div class="property_details">
+                                <p class="property_name">
+                                    <t t-esc="property.name"/>
+                                </p>
+                                <p class="sales_type1">
+                                    <t t-esc="property.sales_type"/>
+                                </p>
+                            </div>
+                            <div class="property_price">
+                                <span class="amount">
+                                    ₹
+                                    <t t-esc="property.amount"/>
+                                </span>
+                                <span class="start_from">/Start From</span>
+                            </div>
+                        </div>
+                        <div class="address text-muted ">
+                            <h6>
+                                <t t-esc="property.address"/>
+                            </h6>
+                        </div>
+                        <div class="icon-container1">
+                            <!-- Double Bed Icon -->
+                            <div class="icon-item1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18" fill="currentColor"
+                                     viewBox="0 0 22 18">
+                                    <path d="M22 10V6c0-2.2-1.8-4-4-4H6C3.8 2 2 3.8 2 6v4H1v8h1v3h2v-3h14v3h2v-3h1v-8h-1zm-14 6H4v-3h4v3zm10 0h-4v-3h4v3zm0-5H4V6c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v5z"/>
+                                </svg>
+                                <p class="small mb-1">Bed:
+                                    <t t-esc="property.bedrooms"/>
+                                </p>
+                            </div>
+                            <!-- Bathroom Icon -->
+                            <div class="icon-item1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18" fill="currentColor"
+                                     viewBox="0 0 22 18">
+                                    <path d="M22 14H6V7.7c1.1.8 2.5 1.3 4 1.3 3.3 0 6-2.7 6-6h2c0 4.4-3.6 8-8 8-1.5 0-3-.4-4 .2-1.1L6 9v5H2v6h20v-6zM6 19v-3h2v3H6zm10 0v-3h2v3h-2z"/>
+                                </svg>
+                                <p class="small mb-1">Baths:
+                                    <t t-esc="property.bathrooms"/>
+                                </p>
+                            </div>
+                            <!-- Square Ruler Icon -->
+                            <div class="icon-item1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18" fill="currentColor"
+                                     viewBox="0 0 22 18">
+                                    <path d="M21 6l-1.4-1.4L16.5 7.7l-1.8-1.8 3.1-3.1L16.5 2 5 13.5V19h5.5L21 6zm-11.9 9.5l7.4-7.4.7.7-7.4 7.4H9v-.7zm10.1-.7l-3.1 3.1 1.4 1.4L22 16.5 19.2 13.7zm-6.4 1.4l.7.7-3.1 3.1H5v-2.2l7.4-7.4z"/>
+                                </svg>
+                                <p class="small mb-1">Sq Ft:
+                                    <t t-esc="property.property_area"/>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="action-buttons ">
+                            <span class="share">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-share-fill" viewBox="0 0 16 16">
+                                    <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5"/>
+                                </svg>
+                                Share
+                            </span>
+                            <span class="save">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+                                </svg>
+                                Save
+                            </span>
+                            <span class="print">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-printer" viewBox="0 0 16 16">
+                                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1"/>
+                                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a2 2 0 0 0-2 2v1H2a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v-1a2 2 0 0 0-2-2zm7 2v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1"/>
+                                </svg>
+                                Print
+                            </span>
+                        </div>
+
+                    </div>
+<!--                    <xpath expr="//main" position="inside">-->
+<!--                        <div class="container mt-3 col-md-9 ">-->
+<!--                            &lt;!&ndash; Navbar &ndash;&gt;-->
+<!--                            <nav class="navbar navbar-expand-lg bg-white">-->
+<!--                                <div class="container-fluid">-->
+<!--                                    <ul class="navbar-nav mx-auto">-->
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link active" href="#" data-section="about">About</a>-->
+<!--                                        </li>-->
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="#" data-section="feature">Feature</a>-->
+<!--                                        </li>-->
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="#" data-section="gallery">Gallery</a>-->
+<!--                                        </li>-->
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="#" data-section="video">Video</a>-->
+<!--                                        </li>-->
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="#" data-section="floor-plan">Floor Plan</a>-->
+<!--                                        </li>-->
+<!--                                        <li class="nav-item">-->
+<!--                                            <a class="nav-link" href="#" data-section="location">Location</a>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                </div>-->
+<!--                            </nav>-->
+
+<!--                            &lt;!&ndash; Content Sections &ndash;&gt;-->
+<!--                            <div id="about-section" class="content-section active">-->
+<!--                                <h2>About Property</h2>-->
+<!--                                <p>This is a beautifully designed property located in a prime area.</p>-->
+<!--                            </div>-->
+
+<!--                            <div id="feature-section" class="content-section">-->
+<!--                                <h2>Property Features</h2>-->
+<!--                                <p>Details about property features will go here.</p>-->
+<!--                            </div>-->
+
+<!--                            <div id="gallery-section" class="content-section">-->
+<!--                                <h2>Gallery</h2>-->
+<!--                                <p>Gallery content goes here.</p>-->
+<!--                            </div>-->
+
+<!--                            <div id="video-section" class="content-section">-->
+<!--                                <h2>Video</h2>-->
+<!--                                <p>Video content goes here.</p>-->
+<!--                            </div>-->
+
+<!--                            <div id="floor-plan-section" class="content-section">-->
+<!--                                <h2>Floor Plan</h2>-->
+<!--                                <p>Floor plan content goes here.</p>-->
+<!--                            </div>-->
+
+<!--                            <div id="location-section" class="content-section">-->
+<!--                                <h2>Location</h2>-->
+<!--                                <p>Location details go here.</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </xpath>-->
+
+                    <div class="container py-5 px-3 ">
+                        <h2 class="mb-5 text-left">Available Properties</h2>
+                        <div class="row g-4">
+                            <t t-foreach="properties" t-as="property">
+                                <div class="col-lg-4 col-md-4">
+                                    <div class="card h-100 ">
+                                        <!-- Bootstrap Carousel -->
+                                        <div class="carousel slide" t-att-id="'carousel-property-' + str(property.id)"
+                                             data-bs-ride="carousel">
+                                            <span class="sale_type">
+                                                <t t-esc="property.sales_type"/>
+                                            </span>
+                                            <div class="carousel-inner">
+                                                <t t-set="counter" t-value="0"/>
+                                                <t t-foreach="property.image_ids" t-as="image">
+                                                    <div t-att-class="'carousel-item ' + ('active' if counter == 0 else '')">
+                                                        <img t-att-src="'/web/image/property.image/%d/image' % image.id"
+                                                             class="d-block w-100"
+                                                             alt="Property Image"
+                                                             style="object-fit: cover; height: 250px;"/>
+                                                    </div>
+                                                    <t t-set="counter" t-value="counter + 1"/>
+                                                </t>
+                                            </div>
+
+                                            <!-- Navigation Buttons -->
+                                            <button class="carousel-control-prev custom-carousel-control" type="button"
+                                                    t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                                    data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon custom-icon"/>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next custom-carousel-control" type="button"
+                                                    t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                                    data-bs-slide="next">
+                                                <span class="carousel-control-next-icon custom-icon"
+                                                      aria-hidden="true"/>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            <h6 class="city font-montserrat text-muted ">
+                                                <t t-esc="property.city"/>
+                                            </h6>
+                                            <h4 class="card-title font-montserrat ">
+                                                <t t-esc="property.name"/>
+                                            </h4>
+                                            <h6 class="price">
+                                                Amount: ₹
+                                                <t t-esc="property.amount"/>
+                                                *
+                                            </h6>
+                                            <p class="card-text text-muted font-roboto">
+                                                <t t-esc="property.description"/>
+                                            </p>
+
+                                            <div class="icon-container mt-3 d-flex align-items-center text-muted ">
+                                                <!-- Double Bed Icon -->
+                                                <div class="icon-item pe-3 border-end text-center ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18"
+                                                         fill="currentColor" viewBox="0 0 22 18">
+                                                        <path d="M22 10V6c0-2.2-1.8-4-4-4H6C3.8 2 2 3.8 2 6v4H1v8h1v3h2v-3h14v3h2v-3h1v-8h-1zm-14 6H4v-3h4v3zm10 0h-4v-3h4v3zm0-5H4V6c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v5z"/>
+                                                    </svg>
+                                                    <p class="small mb-1">Bed:
+                                                        <t t-esc="property.bedrooms"/>
+                                                    </p>
+                                                </div>
+                                                <!-- Bathroom Icon -->
+                                                <div class="icon-item pe-3 border-end text-center ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18"
+                                                         fill="currentColor" viewBox="0 0 22 18">
+                                                        <path d="M22 14H6V7.7c1.1.8 2.5 1.3 4 1.3 3.3 0 6-2.7 6-6h2c0 4.4-3.6 8-8 8-1.5 0-3-.4-4.2-1.1L6 9v5H2v6h20v-6zM6 19v-3h2v3H6zm10 0v-3h2v3h-2z"/>
+                                                    </svg>
+                                                    <p class="small mb-1">Baths:
+                                                        <t t-esc="property.bathrooms"/>
+                                                    </p>
+                                                </div>
+                                                <!-- Square Ruler Icon -->
+                                                <div class="icon-item text-center ">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18"
+                                                         fill="currentColor" viewBox="0 0 22 18">
+                                                        <path d="M21 6l-1.4-1.4L16.5 7.7l-1.8-1.8 3.1-3.1L16.5 2 5 13.5V19h5.5L21 6zm-11.9 9.5l7.4-7.4.7.7-7.4 7.4H9v-.7zm10.1-.7l-3.1 3.1 1.4 1.4L22 16.5 19.2 13.7zm-6.4 1.4l.7.7-3.1 3.1H5v-2.2l7.4-7.4z"/>
+                                                    </svg>
+                                                    <p class="small mb-1">Sq Ft:
+                                                        <t t-esc="property.property_area"/>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+                                            <div class="d-flex mt-3 justify-content-between align-items-center">
+                                                <p class="date text-muted ">
+                                                    <t t-esc="property.write_date.strftime('%B %d, %Y')"/>
+                                                </p>
+                                                <div>
+                                                    <a t-att-href="'/property/detail/' + str(property.id)"
+                                                       class="detail_nav text-decoration-none text-muted  d-block">
+                                                        <p class="details">
+                                                            Details
+                                                        </p>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </t>
                         </div>
                     </div>
                 </div>

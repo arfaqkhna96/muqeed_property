@@ -383,7 +383,7 @@
                 filterMenu.classList.remove('open');
                 filterToggle.style.display = 'block';
                 };
-                
+
 
                 // Event listener for the filter toggle button
                 filterToggle.addEventListener('click', openFilterMenu);
@@ -602,7 +602,7 @@
             <!-- Filter Menu for Mobile -->
             <div id="mobileFilterMenu" class="d-md-none">
                 <div class="filter-header text-white d-flex justify-content-between align-items-center p-3">
-                    <h5 class="mb-0">Filters</h5>
+                    <h5 class="mb-0">Filter</h5>
                     <button id="closeMobileFilterMenu" class="btn-close btn-close-white"/>
                 </div>
                 <div class="filter-body p-3">

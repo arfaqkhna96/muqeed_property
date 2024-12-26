@@ -167,11 +167,12 @@
                 letter-spacing: 2px; /* Adds extra space between letters */
                 }
 
-<!--                neeraj-->
+                <!--                neeraj-->
                 body {
                 background-image:
                 url('https://res.cloudinary.com/drw030kab/image/upload/v1734595313/xuouyzyqlsisnscszz33.png');
                 background-size: cover;
+                height:100vh;
                 background-repeat: no-repeat;
                 }
                 option {
@@ -194,8 +195,8 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-<!--                width: 100vw;-->
-<!--                height: 100vh;-->
+                <!--                width: 100vw;-->
+                <!--                height: 100vh;-->
                 z-index: 1;
                 }
 
@@ -221,40 +222,41 @@
                 .slider-container-price {
                 position: relative;
                 width: 100%;
-                height: 8px;
-                background-color: #ccc;
-                border-radius: 4px;
-                margin-top: 10px;
+                height: 6px;
+                background-color: #e0e0e0;
+                border-radius: 3px;
                 }
 
                 .slider-track-price {
                 position: absolute;
-                top: 0;
                 height: 100%;
-                background-color: #0275d8;
-                border-radius: 4px;
+                background-color: #4650BD;
+                border-radius: 3px;
                 }
 
                 .slider-handle {
                 position: absolute;
-                top: -6px;
-                width: 18px;
-                height: 18px;
-                background-color: #fff;
-                border: 2px solid #0275d8;
+                top: 50%;
+                width: 16px;
+                height: 16px;
+                background-color: #4650BD;
+                border: 2px solid #4650BD;
                 border-radius: 50%;
+                transform: translate(-50%, -50%);
                 cursor: pointer;
-                transition: transform 0.3s ease;
                 }
 
-                .slider-handle:hover {
-                transform: scale(1.2);
+                .slider-handle:active {
+                transform: translate(-50%, -50%) scale(1.2);
+                transition: transform 0.1s ease-in-out;
                 }
-                
+
+
 
             </style>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
+                // Price Range Slider
                 const priceStart = document.getElementById('priceStart');
                 const priceEnd = document.getElementById('priceEnd');
                 const handleMin = document.getElementById('handleMin');
@@ -267,47 +269,47 @@
 
                 let isDraggingMin = false;
                 let isDraggingMax = false;
+                const sliderWidthPrice = sliderContainerPrice.offsetWidth;
 
                 function updatePriceSlider() {
                 const minValue = parseInt(priceStart.value);
                 const maxValue = parseInt(priceEnd.value);
-                const total = 11000;
 
-                handleMin.style.left = ${(minValue / total) * 100}%;
-                handleMax.style.left = ${(maxValue / total) * 100}%;
+                handleMin.style.left = `${(minValue / 11000) * 100}%`;
+                handleMax.style.left = `${(maxValue / 11000) * 100}%`;
 
-                sliderTrackPrice.style.left = ${(minValue / total) * 100}%;
-                sliderTrackPrice.style.width = ${((maxValue - minValue) / total) * 100}%;
+                sliderTrackPrice.style.left = `${(minValue / 11000) * 100}%`;
+                sliderTrackPrice.style.width = `${((maxValue - minValue) / 11000) * 100}%`;
 
-                priceStartLabel.textContent = ₹${minValue};
-                priceEndLabel.textContent = ₹${maxValue};
+                priceStartLabel.textContent = `₹${minValue}`;
+                priceEndLabel.textContent = `₹${maxValue}`;
                 }
 
-                function handleMouseMove(e, isMinHandle) {
-                const rect = sliderContainerPrice.getBoundingClientRect();
-                const offsetX = e.clientX - rect.left;
-                const percentage = Math.min(Math.max(0, offsetX / rect.width), 1);
-                const newValue = Math.round(percentage * 11000);
-
-                if (isMinHandle) {
-                if (newValue &lt; parseInt(priceEnd.value)) {
-                priceStart.value = newValue;
-                updatePriceSlider();
-                }
-                } else {
-                if (newValue > parseInt(priceStart.value)) {
-                priceEnd.value = newValue;
-                updatePriceSlider();
-                }
-                }
-                }
-
-                handleMin.addEventListener('mousedown', () => (isDraggingMin = true));
-                handleMax.addEventListener('mousedown', () => (isDraggingMax = true));
+                handleMin.addEventListener('mousedown', () => { isDraggingMin = true; });
+                handleMax.addEventListener('mousedown', () => { isDraggingMax = true; });
 
                 window.addEventListener('mousemove', (e) => {
-                if (isDraggingMin) handleMouseMove(e, true);
-                if (isDraggingMax) handleMouseMove(e, false);
+                if (isDraggingMin || isDraggingMax) {
+                const sliderRect = sliderContainerPrice.getBoundingClientRect();
+                const offsetX = e.clientX - sliderRect.left;
+                const percentage = Math.min(Math.max(0, offsetX / sliderWidthPrice), 1);
+
+                if (isDraggingMin) {
+                const newMinValue = Math.round(percentage * 11000);
+                if (newMinValue &lt; parseInt(priceEnd.value)) {
+                priceStart.value = newMinValue;
+                updatePriceSlider();
+                }
+                }
+
+                if (isDraggingMax) {
+                const newMaxValue = Math.round(percentage * 11000);
+                if (newMaxValue > parseInt(priceStart.value)) {
+                priceEnd.value = newMaxValue;
+                updatePriceSlider();
+                }
+                }
+                }
                 });
 
                 window.addEventListener('mouseup', () => {
@@ -317,6 +319,7 @@
 
                 updatePriceSlider(); // Initial update
                 });
+
             </script>
 
             <div class="container hero-container">
@@ -326,7 +329,7 @@
                     <div class="col-12 col-md-6 text-center text-md-start">
                         <h1 class="fw-bold">Reality Properties Solve Your Problems</h1>
                         <p>Want to buy or rent Home?</p>
-                        <button class="btn btn-primary px-4 mt-3">Submit Property</button>
+<!--                        <button class="btn btn-primary px-4 mt-3">Submit Property</button>-->
                     </div>
 
                     <!-- Filter Section -->
@@ -390,8 +393,8 @@
                                 </div>
                                 <div class="slider-container-price">
                                     <div class="slider-track-price"></div>
-                                    <div class="slider-handle" id="handleMin" style="left: 0;"></div>
-                                    <div class="slider-handle" id="handleMax" style="left: 100%;"></div>
+                                    <div class="slider-handle" id="handleMin" style="left: -2;"></div>
+                                    <div class="slider-handle" id="handleMax" style="left: 98%;"></div>
                                     <input type="hidden" id="priceStart" value="0"/>
                                     <input type="hidden" id="priceEnd" value="11000"/>
                                 </div>

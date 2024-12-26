@@ -27,6 +27,10 @@
                         background-color: #4650BD; /* Darker green on hover */
                         transform: translateY(-2px); /* Slight lift effect */
                         }
+                        .btn:active {
+                        background-color: #4650BD;
+                        color: white; /* Optional: Adjust text color for better contrast */
+                        }
 
                         /* Filter Sidebar Styling */
                         .filter-sidebar {
@@ -328,7 +332,7 @@
                         top: -5px;
                         width: 20px;
                         height: 20px;
-                        background-color: ##4650BD;
+                        background-color: #4650BD;
                         border-radius: 50%;
                         cursor: pointer;
                         }
@@ -376,15 +380,18 @@
                         bottom: 20px;
                         right: 20px;
                         z-index: 1100;
-                        border-radius: 50%;
+                        border-radius: 15px;
                         width: 60px;
-                        height: 60px;
+                        height: 40px;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                         }
-
+                        #filterToggleBtn.active {
+                        background-color: #4650BD; /* Active state background color */
+                        color: white; /* Active state text color */
+                        }
 
                     </style>
 
@@ -448,11 +455,11 @@
                         minValue = parseInt(priceStart.value);
                         maxValue = parseInt(priceEnd.value);
 
-                        handleMin.style.left = `${(minValue /  100000) * 100}%`;
-                        handleMax.style.left = `${(maxValue /  100000) * 100}%`;
+                        handleMin.style.left = `${(minValue /  100000) * 95}%`;
+                        handleMax.style.left = `${(maxValue /  100000) * 95}%`;
 
-                        sliderTrackPrice.style.left = `${(minValue /  100000) * 100}%`;
-                        sliderTrackPrice.style.width = `${((maxValue - minValue) /  100000) * 100}%`;
+                        sliderTrackPrice.style.left = `${(minValue /  100000) * 95}%`;
+                        sliderTrackPrice.style.width = `${((maxValue - minValue) /  100000) * 95}%`;
 
                         priceStartLabel.textContent = `₹${minValue}`;
                         priceEndLabel.textContent = `₹${maxValue}`;
@@ -511,11 +518,11 @@
                         const minAreaValue = parseInt(areaStart.value);
                         const maxAreaValue = parseInt(areaEnd.value);
 
-                        handleAreaMin.style.left = `${(minAreaValue / 10000) * 100}%`;
-                        handleAreaMax.style.left = `${(maxAreaValue / 10000) * 100}%`;
+                        handleAreaMin.style.left = `${(minAreaValue / 10000) * 95}%`;
+                        handleAreaMax.style.left = `${(maxAreaValue / 10000) * 95}%`;
 
-                        sliderTrackArea.style.left = `${(minAreaValue / 10000) * 100}%`;
-                        sliderTrackArea.style.width = `${((maxAreaValue - minAreaValue) / 10000) * 100}%`;
+                        sliderTrackArea.style.left = `${(minAreaValue / 10000) * 95}%`;
+                        sliderTrackArea.style.width = `${((maxAreaValue - minAreaValue) / 10000) * 95}%`;
 
                         areaStartLabel.textContent = `${minAreaValue} sq ft`;
                         areaEndLabel.textContent = `${maxAreaValue} sq ft`;
@@ -581,6 +588,7 @@
                         }
                         });
                         });
+                        
                     </script>
                 </xpath>
 
@@ -607,28 +615,7 @@
                                         <textarea class="form-control" id="textAreaField" rows="3"
                                                   placeholder="Message"></textarea>
                                     </div>
-                                    <button type="submit" class="btn btn-danger w-100">Submit Request</button>
-                                </form>
-                                <br/>
-                                <h4>Filter</h4>
-                                <form>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" id="inputField1"
-                                               placeholder="Your Name"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" id="inputField2"
-                                               placeholder="Email Address"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control" id="inputField3"
-                                               placeholder="Mobile Number"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <textarea class="form-control" id="textAreaField" rows="3"
-                                                  placeholder="Message"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-danger w-100">Submit Request</button>
+                                    <button type="submit" class="btn btn-primary w-100">Submit Request</button>
                                 </form>
                                 <br/>
                                 <h4>Filter</h4>
@@ -670,7 +657,7 @@
                                             <div class="slider-container-price">
                                                 <div class="slider-track-price"/>
                                                 <div class="slider-handle" id="handleMin" style="left: 0;"/>
-                                                <div class="slider-handle" id="handleMax" style="left: 100%;"/>
+                                                <div class="slider-handle" id="handleMax" style="left: 95%;"/>
                                                 <input type="hidden" id="priceStart" value="0"/>
                                                 <input type="hidden" id="priceEnd" value=" 100000"/>
                                             </div>
@@ -687,14 +674,14 @@
                                             <div class="slider-container-area">
                                                 <div class="slider-track-area"/>
                                                 <div class="slider-handle" id="handleAreaMin" style="left: 0;"/>
-                                                <div class="slider-handle" id="handleAreaMax" style="left: 100%;"/>
+                                                <div class="slider-handle" id="handleAreaMax" style="left: 95%;"/>
                                                 <input type="hidden" id="areaStart" value="0"/>
                                                 <input type="hidden" id="areaEnd" value="10000"/>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <button type="button" onclick="handleSubmit(event)" class="btn btn-danger w-100">
+                                    <button type="button" onclick="handleSubmit(event)" class="btn btn-primary w-100">
                                         Search
                                     </button>
 
@@ -702,130 +689,132 @@
                             </div>
                         </div>
                         <div class="col-md-9 p-none">
-                        <div class="container ">
-                            <h2 class="mb-2 text-left">Available Properties</h2>
-                            <div class="row g-4">
-                                <t t-foreach="properties" t-as="property">
-                                    <div class="col-lg-4 col-md-4">
-                                        <div class="card h-100 ">
-                                            <!-- Bootstrap Carousel -->
-                                            <div class="carousel slide"
-                                                 t-att-id="'carousel-property-' + str(property.id)"
-                                                 data-bs-ride="carousel">
-                                                <span class="sale_type">
-                                                    <t t-esc="property.sales_type"/>
-                                                </span>
-                                                <div class="carousel-inner">
-                                                    <t t-set="counter" t-value="0"/>
-                                                    <t t-foreach="property.image_ids" t-as="image">
-                                                        <div t-att-class="'carousel-item ' + ('active' if counter == 0 else '')">
-                                                            <img t-att-src="'/web/image/property.image/%d/image' % image.id"
-                                                                 class="d-block w-100"
-                                                                 alt="Property Image"
-                                                                 style="object-fit: cover; height: 250px;"/>
-                                                        </div>
-                                                        <t t-set="counter" t-value="counter + 1"/>
-                                                    </t>
-                                                </div>
-
-                                                <!-- Navigation Buttons -->
-                                                <button class="carousel-control-prev custom-carousel-control"
-                                                        type="button"
-                                                        t-att-data-bs-target="'#carousel-property-' + str(property.id)"
-                                                        data-bs-slide="prev">
-                                                    <span class="carousel-control-prev-icon custom-icon"/>
-                                                    <span class="visually-hidden">Previous</span>
-                                                </button>
-                                                <button class="carousel-control-next custom-carousel-control"
-                                                        type="button"
-                                                        t-att-data-bs-target="'#carousel-property-' + str(property.id)"
-                                                        data-bs-slide="next">
-                                                    <span class="carousel-control-next-icon custom-icon"
-                                                          aria-hidden="true"/>
-                                                    <span class="visually-hidden">Next</span>
-                                                </button>
-
-                                            </div>
-                                            <!-- Card Body -->
-                                            <div class="card-body">
-                                                <h6 class="city font-montserrat text-muted ">
-                                                    <t t-esc="property.city"/>
-                                                </h6>
-                                                <h4 class="card-title font-montserrat ">
-                                                    <t t-esc="property.name"/>
-                                                </h4>
-                                                <h6 class="price">
-                                                    Amount: ₹
-                                                    <t t-esc="property.amount"/>
-                                                    *
-                                                </h6>
-                                                <p class="card-text text-muted font-roboto">
-                                                    <t t-esc="property.description"/>
-                                                </p>
-
-                                                <div class="icon-container mt-3 d-flex align-items-center text-muted ">
-                                                    <!-- Double Bed Icon -->
-                                                    <div class="icon-item pe-3 border-end text-center ">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18"
-                                                             fill="currentColor" viewBox="0 0 22 18">
-                                                            <path d="M22 10V6c0-2.2-1.8-4-4-4H6C3.8 2 2 3.8 2 6v4H1v8h1v3h2v-3h14v3h2v-3h1v-8h-1zm-14 6H4v-3h4v3zm10 0h-4v-3h4v3zm0-5H4V6c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v5z"/>
-                                                        </svg>
-                                                        <p class="small mb-1">Bed:
-                                                            <t t-esc="property.bedrooms"/>
-                                                        </p>
+                            <div class="container ">
+                                <h2 class="mb-2 text-left">Available Properties</h2>
+                                <div class="row g-4">
+                                    <t t-foreach="properties" t-as="property">
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="card h-100 ">
+                                                <!-- Bootstrap Carousel -->
+                                                <div class="carousel slide"
+                                                     t-att-id="'carousel-property-' + str(property.id)"
+                                                     data-bs-ride="carousel">
+                                                    <span class="sale_type">
+                                                        <t t-esc="property.sales_type"/>
+                                                    </span>
+                                                    <div class="carousel-inner">
+                                                        <t t-set="counter" t-value="0"/>
+                                                        <t t-foreach="property.image_ids" t-as="image">
+                                                            <div t-att-class="'carousel-item ' + ('active' if counter == 0 else '')">
+                                                                <img t-att-src="'/web/image/property.image/%d/image' % image.id"
+                                                                     class="d-block w-100"
+                                                                     alt="Property Image"
+                                                                     style="object-fit: cover; height: 250px;"/>
+                                                            </div>
+                                                            <t t-set="counter" t-value="counter + 1"/>
+                                                        </t>
                                                     </div>
-                                                    <!-- Bathroom Icon -->
-                                                    <div class="icon-item pe-3 border-end text-center ">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18"
-                                                             fill="currentColor" viewBox="0 0 22 18">
-                                                            <path d="M22 14H6V7.7c1.1.8 2.5 1.3 4 1.3 3.3 0 6-2.7 6-6h2c0 4.4-3.6 8-8 8-1.5 0-3-.4-4.2-1.1L6 9v5H2v6h20v-6zM6 19v-3h2v3H6zm10 0v-3h2v3h-2z"/>
-                                                        </svg>
-                                                        <p class="small mb-1">Baths:
-                                                            <t t-esc="property.bathrooms"/>
-                                                        </p>
-                                                    </div>
-                                                    <!-- Square Ruler Icon -->
-                                                    <div class="icon-item text-center ">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18"
-                                                             fill="currentColor" viewBox="0 0 22 18">
-                                                            <path d="M21 6l-1.4-1.4L16.5 7.7l-1.8-1.8 3.1-3.1L16.5 2 5 13.5V19h5.5L21 6zm-11.9 9.5l7.4-7.4.7.7-7.4 7.4H9v-.7zm10.1-.7l-3.1 3.1 1.4 1.4L22 16.5 19.2 13.7zm-6.4 1.4l.7.7-3.1 3.1H5v-2.2l7.4-7.4z"/>
-                                                        </svg>
-                                                        <p class="small mb-1">Sq Ft:
-                                                            <t t-esc="property.property_area"/>
-                                                        </p>
-                                                    </div>
+
+                                                    <!-- Navigation Buttons -->
+                                                    <button class="carousel-control-prev custom-carousel-control"
+                                                            type="button"
+                                                            t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                                            data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon custom-icon"/>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next custom-carousel-control"
+                                                            type="button"
+                                                            t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                                            data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon custom-icon"
+                                                              aria-hidden="true"/>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
 
                                                 </div>
-                                                <div class="d-flex mt-3 justify-content-between align-items-center">
-                                                    <p class="date text-muted ">
-                                                        <t t-esc="property.write_date.strftime('%B %d, %Y')"/>
+                                                <!-- Card Body -->
+                                                <div class="card-body">
+                                                    <h6 class="city font-montserrat text-muted ">
+                                                        <t t-esc="property.city"/>
+                                                    </h6>
+                                                    <h4 class="card-title font-montserrat ">
+                                                        <t t-esc="property.name"/>
+                                                    </h4>
+                                                    <h6 class="price">
+                                                        Amount: ₹
+                                                        <t t-esc="property.amount"/>
+                                                        *
+                                                    </h6>
+                                                    <p class="card-text text-muted font-roboto">
+                                                        <t t-esc="property.description"/>
                                                     </p>
-                                                    <div>
-                                                        <a t-att-href="'/property/detail/' + str(property.id)"
-                                                           class="detail_nav text-decoration-none text-muted  d-block">
-                                                            <p class="details">
-                                                                Details
+
+                                                    <div class="icon-container mt-3 d-flex align-items-center text-muted ">
+                                                        <!-- Double Bed Icon -->
+                                                        <div class="icon-item pe-3 border-end text-center ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="22"
+                                                                 height="18"
+                                                                 fill="currentColor" viewBox="0 0 22 18">
+                                                                <path d="M22 10V6c0-2.2-1.8-4-4-4H6C3.8 2 2 3.8 2 6v4H1v8h1v3h2v-3h14v3h2v-3h1v-8h-1zm-14 6H4v-3h4v3zm10 0h-4v-3h4v3zm0-5H4V6c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v5z"/>
+                                                            </svg>
+                                                            <p class="small mb-1">Bed:
+                                                                <t t-esc="property.bedrooms"/>
                                                             </p>
-                                                        </a>
+                                                        </div>
+                                                        <!-- Bathroom Icon -->
+                                                        <div class="icon-item pe-3 border-end text-center ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="22"
+                                                                 height="18"
+                                                                 fill="currentColor" viewBox="0 0 22 18">
+                                                                <path d="M22 14H6V7.7c1.1.8 2.5 1.3 4 1.3 3.3 0 6-2.7 6-6h2c0 4.4-3.6 8-8 8-1.5 0-3-.4-4.2-1.1L6 9v5H2v6h20v-6zM6 19v-3h2v3H6zm10 0v-3h2v3h-2z"/>
+                                                            </svg>
+                                                            <p class="small mb-1">Baths:
+                                                                <t t-esc="property.bathrooms"/>
+                                                            </p>
+                                                        </div>
+                                                        <!-- Square Ruler Icon -->
+                                                        <div class="icon-item text-center ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="22"
+                                                                 height="18"
+                                                                 fill="currentColor" viewBox="0 0 22 18">
+                                                                <path d="M21 6l-1.4-1.4L16.5 7.7l-1.8-1.8 3.1-3.1L16.5 2 5 13.5V19h5.5L21 6zm-11.9 9.5l7.4-7.4.7.7-7.4 7.4H9v-.7zm10.1-.7l-3.1 3.1 1.4 1.4L22 16.5 19.2 13.7zm-6.4 1.4l.7.7-3.1 3.1H5v-2.2l7.4-7.4z"/>
+                                                            </svg>
+                                                            <p class="small mb-1">Sq Ft:
+                                                                <t t-esc="property.property_area"/>
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="d-flex mt-3 justify-content-between align-items-center">
+                                                        <p class="date text-muted ">
+                                                            <t t-esc="property.write_date.strftime('%B %d, %Y')"/>
+                                                        </p>
+                                                        <div>
+                                                            <a t-att-href="'/property/detail/' + str(property.id)"
+                                                               class="detail_nav text-decoration-none text-muted  d-block">
+                                                                <p class="details">
+                                                                    Details
+                                                                </p>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
-                                    </div>
-                                </t>
+                                    </t>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
 
                         <!-- Sliding Filter Menu for Mobile -->
-                        <button id="filterToggleBtn" class="btn btn-outline-danger d-md-none">
-                            <i class="bi bi-funnel-fill"></i>
+                        <button id="filterToggleBtn" class="btn btn-outline-primary d-md-none">
                             Filter
                         </button>
                         <div id="filterMenu" class="filter-menu">
-                            <button id="closeFilterMenu" class="btn-close btn-close-white"></button>
+                            <button id="closeFilterMenu" class="btn-close btn-close-white"/>
                             <h4>Request Exploration</h4>
                             <form>
                                 <div class="mb-3">
@@ -841,29 +830,9 @@
                                 </div>
                                 <div class="mb-3">
                                     <textarea class="form-control" id="textAreaField" rows="3"
-                                              placeholder="Message"></textarea>
+                                              placeholder="Message"/>
                                 </div>
-                                <button type="submit" class="btn btn-danger w-100">Submit Request</button>
-                            </form>
-                            <br/>
-                            <h4>Filter</h4>
-                            <form>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="inputField1" placeholder="Your Name"/>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="inputField2"
-                                           placeholder="Email Address"/>
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" class="form-control" id="inputField3"
-                                           placeholder="Mobile Number"/>
-                                </div>
-                                <div class="mb-3">
-                                    <textarea class="form-control" id="textAreaField" rows="3"
-                                              placeholder="Message"></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-danger w-100">Submit Request</button>
+                                <button type="submit" class="btn btn-primary w-100">Submit Request</button>
                             </form>
                             <br/>
                             <h4>Filter</h4>
@@ -905,7 +874,7 @@
                                         <div class="slider-container-price">
                                             <div class="slider-track-price"/>
                                             <div class="slider-handle" id="handleMin" style="left: 0;"/>
-                                            <div class="slider-handle" id="handleMax" style="left: 100%;"/>
+                                            <div class="slider-handle" id="handleMax" style="left: 95%;"/>
                                             <input type="hidden" id="priceStart" value="0"/>
                                             <input type="hidden" id="priceEnd" value=" 100000"/>
                                         </div>
@@ -922,14 +891,14 @@
                                         <div class="slider-container-area">
                                             <div class="slider-track-area"/>
                                             <div class="slider-handle" id="handleAreaMin" style="left: 0;"/>
-                                            <div class="slider-handle" id="handleAreaMax" style="left: 100%;"/>
+                                            <div class="slider-handle" id="handleAreaMax" style="left: 95%;"/>
                                             <input type="hidden" id="areaStart" value="0"/>
                                             <input type="hidden" id="areaEnd" value="10000"/>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button type="button" onclick="handleSubmit(event)" class="btn btn-danger w-100">
+                                <button type="button" onclick="handleSubmit(event)" class="btn btn-primary w-100">
                                     Search
                                 </button>
 

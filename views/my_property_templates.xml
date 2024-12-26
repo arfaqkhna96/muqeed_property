@@ -14,7 +14,7 @@
 
                         /* Button Styles */
                         .btn {
-                        background-color: #28a745; /* Green background */
+                        background-color: #4650BD; /* Green background */
                         color: #fff; /* White text */
                         border: none;
                         border-radius: 5px; /* Rounded corners */
@@ -24,7 +24,7 @@
                         }
 
                         .btn:hover {
-                        background-color: #218838; /* Darker green on hover */
+                        background-color: #4650BD; /* Darker green on hover */
                         transform: translateY(-2px); /* Slight lift effect */
                         }
 
@@ -52,7 +52,7 @@
                         }
 
                         .form-control:focus {
-                        border-color: #28a745; /* Green border on focus */
+                        border-color: #4650BD; /* Green border on focus */
                         outline: none; /* Remove outline */
                         }
 
@@ -294,7 +294,7 @@
                         position: absolute;
                         top: 0;
                         height: 10px;
-                        background-color: #28a745;
+                        background-color: #4650BD;
                         }
 
                         .slider-handle {
@@ -302,7 +302,7 @@
                         top: -5px;
                         width: 20px;
                         height: 20px;
-                        background-color:#28a745;
+                        background-color:#4650BD;
                         border-radius: 50%;
                         cursor: pointer;
                         }
@@ -320,7 +320,7 @@
                         position: absolute;
                         top: 0;
                         height: 10px;
-                        background-color: #28a745;
+                        background-color: #4650BD;
                         }
 
                         .slider-handle {
@@ -328,7 +328,7 @@
                         top: -5px;
                         width: 20px;
                         height: 20px;
-                        background-color: #28a745;
+                        background-color: ##4650BD;
                         border-radius: 50%;
                         cursor: pointer;
                         }

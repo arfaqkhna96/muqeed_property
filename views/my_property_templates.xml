@@ -11,6 +11,13 @@
                         background-color: #f4f7f6; /* Light background for contrast */
                         color: #333; /* Dark text for readability */
                         }
+                        .navbar-nav .nav-link.active, .navbar-nav .show .nav-link {
+                        border-bottom: 2px solid #FF6040;
+                        }
+
+                        .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+                        color:#FF6040;!important
+                        }
 
                         /* Button Styles */
                         .btn {

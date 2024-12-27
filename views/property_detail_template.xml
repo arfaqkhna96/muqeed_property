@@ -10,6 +10,13 @@
                         padding: 0;
                         background-color: #f9f9f9;
                         }
+                        .navbar-nav .nav-link.active, .navbar-nav .show .nav-link {
+                        border-bottom: 2px solid #FF6040;
+                        }
+
+                        .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+                        color:#FF6040;!important
+                        }
                         .card{
                         background-color: #fff; /* White background */
                         padding: 0px; /* Padding */
@@ -383,66 +390,66 @@
                         font-size: 0.7rem; /* Smaller font for secondary text */
                         }
                         }
-<!--                        .navbar {-->
-<!--                        border-bottom: 1px solid #eaeaea;-->
-<!--                        }-->
+                        <!--                        .navbar {-->
+                        <!--                        border-bottom: 1px solid #eaeaea;-->
+                        <!--                        }-->
 
-<!--                        .nav-link {-->
-<!--                        color: #333;-->
-<!--                        font-weight: 500;-->
-<!--                        padding: 10px 15px;-->
-<!--                        text-transform: uppercase;-->
-<!--                        }-->
+                        <!--                        .nav-link {-->
+                        <!--                        color: #333;-->
+                        <!--                        font-weight: 500;-->
+                        <!--                        padding: 10px 15px;-->
+                        <!--                        text-transform: uppercase;-->
+                        <!--                        }-->
 
-<!--                        .nav-link.active {-->
-<!--                        color: #ff5c40;-->
-<!--                        border-bottom: 3px solid #ff5c40;-->
-<!--                        }-->
+                        <!--                        .nav-link.active {-->
+                        <!--                        color: #ff5c40;-->
+                        <!--                        border-bottom: 3px solid #ff5c40;-->
+                        <!--                        }-->
 
-<!--                        .nav-link:hover {-->
-<!--                        color: #ff5c40;-->
-<!--                        }-->
-<!--                        .content-section {-->
-<!--                        display: none;-->
-<!--                        }-->
-<!--                        .navbar-nav {-->
-<!--                        width: 100%;-->
-<!--                        display: flex;-->
-<!--                        justify-content: space-between;-->
-<!--                        padding: 0px 10px;-->
-<!--                        }-->
-<!--                        .content-section.active {-->
-<!--                        display: block;-->
-<!--                        }-->
+                        <!--                        .nav-link:hover {-->
+                        <!--                        color: #ff5c40;-->
+                        <!--                        }-->
+                        <!--                        .content-section {-->
+                        <!--                        display: none;-->
+                        <!--                        }-->
+                        <!--                        .navbar-nav {-->
+                        <!--                        width: 100%;-->
+                        <!--                        display: flex;-->
+                        <!--                        justify-content: space-between;-->
+                        <!--                        padding: 0px 10px;-->
+                        <!--                        }-->
+                        <!--                        .content-section.active {-->
+                        <!--                        display: block;-->
+                        <!--                        }-->
 
 
                     </style>
                     <script>
-<!--                        odoo.define('muqeed_property.navbar', function (require) {-->
-<!--                        "use strict";-->
+                        <!--                        odoo.define('muqeed_property.navbar', function (require) {-->
+                        <!--                        "use strict";-->
 
-<!--                        document.addEventListener('DOMContentLoaded', function () {-->
-<!--                        const navLinks = document.querySelectorAll('.nav-link');-->
-<!--                        const contentSections = document.querySelectorAll('.content-section');-->
+                        <!--                        document.addEventListener('DOMContentLoaded', function () {-->
+                        <!--                        const navLinks = document.querySelectorAll('.nav-link');-->
+                        <!--                        const contentSections = document.querySelectorAll('.content-section');-->
 
-<!--                        navLinks.forEach(link => {-->
-<!--                        link.addEventListener('click', function (e) {-->
-<!--                        e.preventDefault();-->
+                        <!--                        navLinks.forEach(link => {-->
+                        <!--                        link.addEventListener('click', function (e) {-->
+                        <!--                        e.preventDefault();-->
 
-<!--                        // Remove active class from all nav links-->
-<!--                        navLinks.forEach(nav => nav.classList.remove('active'));-->
-<!--                        // Add active class to the clicked link-->
-<!--                        this.classList.add('active');-->
+                        <!--                        // Remove active class from all nav links-->
+                        <!--                        navLinks.forEach(nav => nav.classList.remove('active'));-->
+                        <!--                        // Add active class to the clicked link-->
+                        <!--                        this.classList.add('active');-->
 
-<!--                        // Hide all content sections-->
-<!--                        contentSections.forEach(section => section.classList.remove('active'));-->
-<!--                        // Show the selected section-->
-<!--                        const sectionId = this.getAttribute('data-section') + '-section';-->
-<!--                        document.getElementById(sectionId).classList.add('active');-->
-<!--                        });-->
-<!--                        });-->
-<!--                        });-->
-<!--                        });-->
+                        <!--                        // Hide all content sections-->
+                        <!--                        contentSections.forEach(section => section.classList.remove('active'));-->
+                        <!--                        // Show the selected section-->
+                        <!--                        const sectionId = this.getAttribute('data-section') + '-section';-->
+                        <!--                        document.getElementById(sectionId).classList.add('active');-->
+                        <!--                        });-->
+                        <!--                        });-->
+                        <!--                        });-->
+                        <!--                        });-->
 
 
                     </script>
@@ -559,66 +566,66 @@
                         </div>
 
                     </div>
-<!--                    <xpath expr="//main" position="inside">-->
-<!--                        <div class="container mt-3 col-md-9 ">-->
-<!--                            &lt;!&ndash; Navbar &ndash;&gt;-->
-<!--                            <nav class="navbar navbar-expand-lg bg-white">-->
-<!--                                <div class="container-fluid">-->
-<!--                                    <ul class="navbar-nav mx-auto">-->
-<!--                                        <li class="nav-item">-->
-<!--                                            <a class="nav-link active" href="#" data-section="about">About</a>-->
-<!--                                        </li>-->
-<!--                                        <li class="nav-item">-->
-<!--                                            <a class="nav-link" href="#" data-section="feature">Feature</a>-->
-<!--                                        </li>-->
-<!--                                        <li class="nav-item">-->
-<!--                                            <a class="nav-link" href="#" data-section="gallery">Gallery</a>-->
-<!--                                        </li>-->
-<!--                                        <li class="nav-item">-->
-<!--                                            <a class="nav-link" href="#" data-section="video">Video</a>-->
-<!--                                        </li>-->
-<!--                                        <li class="nav-item">-->
-<!--                                            <a class="nav-link" href="#" data-section="floor-plan">Floor Plan</a>-->
-<!--                                        </li>-->
-<!--                                        <li class="nav-item">-->
-<!--                                            <a class="nav-link" href="#" data-section="location">Location</a>-->
-<!--                                        </li>-->
-<!--                                    </ul>-->
-<!--                                </div>-->
-<!--                            </nav>-->
+                    <!--                    <xpath expr="//main" position="inside">-->
+                    <!--                        <div class="container mt-3 col-md-9 ">-->
+                    <!--                            &lt;!&ndash; Navbar &ndash;&gt;-->
+                    <!--                            <nav class="navbar navbar-expand-lg bg-white">-->
+                    <!--                                <div class="container-fluid">-->
+                    <!--                                    <ul class="navbar-nav mx-auto">-->
+                    <!--                                        <li class="nav-item">-->
+                    <!--                                            <a class="nav-link active" href="#" data-section="about">About</a>-->
+                    <!--                                        </li>-->
+                    <!--                                        <li class="nav-item">-->
+                    <!--                                            <a class="nav-link" href="#" data-section="feature">Feature</a>-->
+                    <!--                                        </li>-->
+                    <!--                                        <li class="nav-item">-->
+                    <!--                                            <a class="nav-link" href="#" data-section="gallery">Gallery</a>-->
+                    <!--                                        </li>-->
+                    <!--                                        <li class="nav-item">-->
+                    <!--                                            <a class="nav-link" href="#" data-section="video">Video</a>-->
+                    <!--                                        </li>-->
+                    <!--                                        <li class="nav-item">-->
+                    <!--                                            <a class="nav-link" href="#" data-section="floor-plan">Floor Plan</a>-->
+                    <!--                                        </li>-->
+                    <!--                                        <li class="nav-item">-->
+                    <!--                                            <a class="nav-link" href="#" data-section="location">Location</a>-->
+                    <!--                                        </li>-->
+                    <!--                                    </ul>-->
+                    <!--                                </div>-->
+                    <!--                            </nav>-->
 
-<!--                            &lt;!&ndash; Content Sections &ndash;&gt;-->
-<!--                            <div id="about-section" class="content-section active">-->
-<!--                                <h2>About Property</h2>-->
-<!--                                <p>This is a beautifully designed property located in a prime area.</p>-->
-<!--                            </div>-->
+                    <!--                            &lt;!&ndash; Content Sections &ndash;&gt;-->
+                    <!--                            <div id="about-section" class="content-section active">-->
+                    <!--                                <h2>About Property</h2>-->
+                    <!--                                <p>This is a beautifully designed property located in a prime area.</p>-->
+                    <!--                            </div>-->
 
-<!--                            <div id="feature-section" class="content-section">-->
-<!--                                <h2>Property Features</h2>-->
-<!--                                <p>Details about property features will go here.</p>-->
-<!--                            </div>-->
+                    <!--                            <div id="feature-section" class="content-section">-->
+                    <!--                                <h2>Property Features</h2>-->
+                    <!--                                <p>Details about property features will go here.</p>-->
+                    <!--                            </div>-->
 
-<!--                            <div id="gallery-section" class="content-section">-->
-<!--                                <h2>Gallery</h2>-->
-<!--                                <p>Gallery content goes here.</p>-->
-<!--                            </div>-->
+                    <!--                            <div id="gallery-section" class="content-section">-->
+                    <!--                                <h2>Gallery</h2>-->
+                    <!--                                <p>Gallery content goes here.</p>-->
+                    <!--                            </div>-->
 
-<!--                            <div id="video-section" class="content-section">-->
-<!--                                <h2>Video</h2>-->
-<!--                                <p>Video content goes here.</p>-->
-<!--                            </div>-->
+                    <!--                            <div id="video-section" class="content-section">-->
+                    <!--                                <h2>Video</h2>-->
+                    <!--                                <p>Video content goes here.</p>-->
+                    <!--                            </div>-->
 
-<!--                            <div id="floor-plan-section" class="content-section">-->
-<!--                                <h2>Floor Plan</h2>-->
-<!--                                <p>Floor plan content goes here.</p>-->
-<!--                            </div>-->
+                    <!--                            <div id="floor-plan-section" class="content-section">-->
+                    <!--                                <h2>Floor Plan</h2>-->
+                    <!--                                <p>Floor plan content goes here.</p>-->
+                    <!--                            </div>-->
 
-<!--                            <div id="location-section" class="content-section">-->
-<!--                                <h2>Location</h2>-->
-<!--                                <p>Location details go here.</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </xpath>-->
+                    <!--                            <div id="location-section" class="content-section">-->
+                    <!--                                <h2>Location</h2>-->
+                    <!--                                <p>Location details go here.</p>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </xpath>-->
 
                     <div class="container py-5 px-3 ">
                         <h2 class="mb-5 text-left">Available Properties</h2>

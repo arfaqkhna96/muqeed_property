@@ -11,6 +11,14 @@
                 padding: 0;
                 background-color: #f9f9f9;
                 }
+                .navbar-nav .nav-link.active, .navbar-nav .show .nav-link {
+                border-bottom: 2px solid #FF6040;
+                }
+
+                .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+                color:#FF6040;!important
+                }
+
                 .card{
                 background-color: #fff; /* White background */
                 padding: 0px; /* Padding */
@@ -168,32 +176,33 @@
                 }
 
                 <!--                neeraj-->
-         body {
+                body {
                 position:relative;
-    background-image: url('https://res.cloudinary.com/drw030kab/image/upload/v1734595313/xuouyzyqlsisnscszz33.png');
-    background-size: cover; /* Ensure the image covers the entire container */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Avoid repeating the image */
-    height: 100vh; /* Full-screen height */
-    margin: 0; /* Reset margins */
-}
+                background-image:
+                url('https://res.cloudinary.com/drw030kab/image/upload/v1734595313/xuouyzyqlsisnscszz33.png');
+                background-size: cover; /* Ensure the image covers the entire container */
+                background-position: center; /* Center the image */
+                background-repeat: no-repeat; /* Avoid repeating the image */
+                height: 100vh; /* Full-screen height */
+                margin: 0; /* Reset margins */
+                }
 
-/* Add a media query to adjust background behavior for smaller screens */
-@media (max-width: 768px) {
-    body {
-        background-size: contain; /* Use 'contain' to fit the image inside the viewport */
-        background-position: top; /* Align the image to the top */
-    }
-}
+                /* Add a media query to adjust background behavior for smaller screens */
+                @media (max-width: 768px) {
+                body {
+                background-size: contain; /* Use 'contain' to fit the image inside the viewport */
+                background-position: top; /* Align the image to the top */
+                }
+                }
 
-@media (max-width: 480px) {
-    body {
-        background-size: cover; /* Maintain cover but focus on center positioning */
-        background-position: center; /* Center the image */
-    }
-}
+                @media (max-width: 480px) {
+                body {
+                background-size: cover; /* Maintain cover but focus on center positioning */
+                background-position: center; /* Center the image */
+                }
+                }
                 .properties{
-<!--                position:absolute;-->
+                <!--                position:absolute;-->
                 }
                 option {
                 background-color: rgb(0,0,0,0.4);
@@ -423,7 +432,7 @@
             </script>
 
             <div class="container hero-container">
-<!--                <div class="hero-overlay"/>-->
+                <!--                <div class="hero-overlay"/>-->
                 <div class="row hero-content">
                     <!-- Header Section -->
                     <div class="col-12 col-md-6 text-center text-md-start">

@@ -168,12 +168,32 @@
                 }
 
                 <!--                neeraj-->
-                body {
-                background-image:
-                url('https://res.cloudinary.com/drw030kab/image/upload/v1734595313/xuouyzyqlsisnscszz33.png');
-                background-size: cover;
-                height:100vh;
-                background-repeat: no-repeat;
+         body {
+                position:relative;
+    background-image: url('https://res.cloudinary.com/drw030kab/image/upload/v1734595313/xuouyzyqlsisnscszz33.png');
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Avoid repeating the image */
+    height: 100vh; /* Full-screen height */
+    margin: 0; /* Reset margins */
+}
+
+/* Add a media query to adjust background behavior for smaller screens */
+@media (max-width: 768px) {
+    body {
+        background-size: contain; /* Use 'contain' to fit the image inside the viewport */
+        background-position: top; /* Align the image to the top */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        background-size: cover; /* Maintain cover but focus on center positioning */
+        background-position: center; /* Center the image */
+    }
+}
+                .properties{
+<!--                position:absolute;-->
                 }
                 option {
                 background-color: rgb(0,0,0,0.4);
@@ -230,7 +250,7 @@
                 .slider-track-price {
                 position: absolute;
                 height: 100%;
-                background-color: #4650BD;
+                background-color: #ff6040;
                 border-radius: 3px;
                 }
 
@@ -239,8 +259,8 @@
                 top: 50%;
                 width: 16px;
                 height: 16px;
-                background-color: #4650BD;
-                border: 2px solid #4650BD;
+                background-color:#ff6040;
+                border: 2px solid #ff6040;
                 border-radius: 50%;
                 transform: translate(-50%, -50%);
                 cursor: pointer;
@@ -403,7 +423,7 @@
             </script>
 
             <div class="container hero-container">
-                <div class="hero-overlay"></div>
+<!--                <div class="hero-overlay"/>-->
                 <div class="row hero-content">
                     <!-- Header Section -->
                     <div class="col-12 col-md-6 text-center text-md-start">
@@ -489,7 +509,7 @@
                 </div>
             </div>
 
-            <div class="container py-5">
+            <div class="container py-5 properties">
                 <h2 class="mb-5 text-left">Available Properties</h2>
                 <div class="row g-4">
                     <t t-foreach="properties" t-as="property">

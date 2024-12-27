@@ -11,7 +11,7 @@
     ],
 
     'data': [
-        # 'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         # 'views/agent_form.xml',
         'views/my_property.xml',
         # 'views/my_property_templates.xml',

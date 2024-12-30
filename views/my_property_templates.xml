@@ -21,7 +21,7 @@
 
                         /* Button Styles */
                         .btn {
-                        background-color: #ff6040; /* Green background */
+                        /* Green background */
                         color: #fff; /* White text */
                         border: none;
                         border-radius: 5px; /* Rounded corners */
@@ -31,7 +31,7 @@
                         }
 
                         .btn:hover {
-                        background-color: #ff6040; /* Darker green on hover */
+<!--                        background-color: #ff6040; /* Darker green on hover */-->
                         transform: translateY(-2px); /* Slight lift effect */
                         }
                         .btn:active {
@@ -383,6 +383,7 @@
 
                         /* Filter button for Mobile */
                         #filterToggleBtn {
+                        background-color: #ff6040;
                         position: fixed;
                         bottom: 20px;
                         right: 20px;
@@ -396,7 +397,7 @@
                         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                         }
                         #filterToggleBtn.active {
-                        background-color: #4650BD; /* Active state background color */
+                        background-color: #ff6040; /* Active state background color */
                         color: white; /* Active state text color */
                         }
 
@@ -696,7 +697,7 @@
                             </div>
                         </div>
                         <div class="col-md-9 p-none">
-                            <div class="container ">
+                            <div class="container mb-5">
                                 <h2 class="mb-2 text-left">Available Properties</h2>
                                 <div class="row g-4">
                                     <t t-foreach="properties" t-as="property">

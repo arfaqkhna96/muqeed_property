@@ -101,3 +101,28 @@ class MyPropertyController(http.Controller):
             'properties': properties,
             'selected_property_type': property_type  # Pass the selected property type
         })
+
+
+class ContactUs(http.Controller):
+
+    @http.route('/contact', type='http', auth='public', website=True)
+    def contact_us(self, **kwargs):
+        return request.render('muqeed_property.contact_us_template')
+
+    @http.route('/contact/submit', type='http', auth='public', website=True, csrf=False)
+    def submit_contact(self, **kwargs ):
+        # Process form data
+        name = kwargs.get('name')
+        phone = kwargs.get('phone')
+        email = kwargs.get('email')
+        message = kwargs.get('message')
+
+        # Save the data to the `contact.us.message` model
+        request.env['contact.us.message'].sudo().create({
+            'name': name,
+            'phone': phone,
+            'email': email,
+            'message': message,
+        })
+
+        return request.redirect('/contact/thanks')

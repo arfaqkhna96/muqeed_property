@@ -6,8 +6,8 @@
     'category': 'Bussiness',
     'license': 'LGPL-3',
     'sequence': '-100',
-    'depends':[
-        'base','web','portal','mail','website'
+    'depends': [
+        'base', 'web', 'portal', 'mail', 'website'
     ],
 
     'data': [
@@ -20,6 +20,7 @@
         'views/agent_property_views.xml',
         'views/email_template.xml',
         'views/form_template.xml',
+        'views/contactus.xml',
         'views/menu.xml',
 
     ],

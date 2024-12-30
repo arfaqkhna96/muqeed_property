@@ -18,9 +18,9 @@
                 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
                 color:#FF6040;!important
                 }
-<!--                 .navbar-nav .nav-link:hover, .navbar-nav .nav-link.show  {-->
-<!--                color:#FF6040;!important-->
-<!--                }-->
+                <!--                 .navbar-nav .nav-link:hover, .navbar-nav .nav-link.show  {-->
+                <!--                color:#FF6040;!important-->
+                <!--                }-->
 
                 .card{
                 background-color: #fff; /* White background */
@@ -327,10 +327,23 @@
                 display:none;
                 }
                 }
-<!--                .filter{-->
-<!--                background-color:#FF6040;-->
-<!--                }-->
+                .container.properties {
+                position: relative;
+                overflow: hidden;
+                }
 
+                /* Card Animation */
+                .card {
+                opacity: 0;
+                transform: translateY(250px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+                }
+
+                /* Visible State */
+                .card.visible {
+                opacity: 1;
+                transform: translateY(0);
+                }
             </style>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
@@ -353,11 +366,11 @@
                 const minValue = parseInt(priceStart.value);
                 const maxValue = parseInt(priceEnd.value);
 
-                handleMin.style.left = `${(minValue / 11000) * 100}%`;
-                handleMax.style.left = `${(maxValue / 11000) * 100}%`;
+                handleMin.style.left = `${(minValue / 100000) * 100}%`;
+                handleMax.style.left = `${(maxValue / 100000) * 100}%`;
 
-                sliderTrackPrice.style.left = `${(minValue / 11000) * 100}%`;
-                sliderTrackPrice.style.width = `${((maxValue - minValue) / 11000) * 100}%`;
+                sliderTrackPrice.style.left = `${(minValue / 100000) * 100}%`;
+                sliderTrackPrice.style.width = `${((maxValue - minValue) / 100000) * 100}%`;
 
                 priceStartLabel.textContent = `₹${minValue}`;
                 priceEndLabel.textContent = `₹${maxValue}`;
@@ -373,7 +386,7 @@
                 const percentage = Math.min(Math.max(0, offsetX / sliderWidthPrice), 1);
 
                 if (isDraggingMin) {
-                const newMinValue = Math.round(percentage * 11000);
+                const newMinValue = Math.round(percentage * 100000);
                 if (newMinValue &lt; parseInt(priceEnd.value)) {
                 priceStart.value = newMinValue;
                 updatePriceSlider();
@@ -381,7 +394,7 @@
                 }
 
                 if (isDraggingMax) {
-                const newMaxValue = Math.round(percentage * 11000);
+                const newMaxValue = Math.round(percentage * 100000);
                 if (newMaxValue > parseInt(priceStart.value)) {
                 priceEnd.value = newMaxValue;
                 updatePriceSlider();
@@ -409,6 +422,7 @@
                 filterToggle.style.display = 'none';
                 };
 
+
                 // Function to close the filter menu
                 const closeFilterMenuFunc = () => {
                 filterMenu.classList.remove('open');
@@ -430,17 +444,37 @@
                 });
                 });
 
+                document.addEventListener("DOMContentLoaded", function () {
+                const cards = document.querySelectorAll(".card");
+
+                const observerOptions = {
+                root: null, // Use the viewport as the root
+                threshold: 0.1, // Trigger when 10% of the card is visible
+                };
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target); // Stop observing once it's visible
+                }
+                });
+                }, observerOptions);
+
+                cards.forEach(card => {
+                observer.observe(card); // Observe each card
+                });
+                });
+
 
             </script>
 
             <div class="container hero-container">
-                <!--                <div class="hero-overlay"/>-->
                 <div class="row hero-content">
                     <!-- Header Section -->
                     <div class="col-12 col-md-6 text-center text-md-start">
                         <h1 class="fw-bold">Reality Properties Solve Your Problems</h1>
                         <p>Want to buy or rent Home?</p>
-                        <!--                        <button class="btn btn-primary px-4 mt-3">Submit Property</button>-->
                     </div>
 
                     <!-- Filter Section -->
@@ -500,14 +534,14 @@
                                 <label class="form-label">Price Range:</label>
                                 <div class="d-flex justify-content-between">
                                     <span id="priceStartLabel">₹0</span>
-                                    <span id="priceEndLabel">₹11,000</span>
+                                    <span id="priceEndLabel">₹100000</span>
                                 </div>
                                 <div class="slider-container-price">
-                                    <div class="slider-track-price"></div>
-                                    <div class="slider-handle" id="handleMin" style="left: -2;"></div>
-                                    <div class="slider-handle" id="handleMax" style="left: 98%;"></div>
+                                    <div class="slider-track-price"/>
+                                    <div class="slider-handle" id="handleMin" style="left: -2;"/>
+                                    <div class="slider-handle" id="handleMax" style="left: 98%;"/>
                                     <input type="hidden" id="priceStart" value="0"/>
-                                    <input type="hidden" id="priceEnd" value="11000"/>
+                                    <input type="hidden" id="priceEnd" value="100000"/>
                                 </div>
                             </div>
 

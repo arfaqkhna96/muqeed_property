@@ -31,7 +31,7 @@
                         }
 
                         .btn:hover {
-<!--                        background-color: #ff6040; /* Darker green on hover */-->
+                        <!--                        background-color: #ff6040; /* Darker green on hover */-->
                         transform: translateY(-2px); /* Slight lift effect */
                         }
                         .btn:active {
@@ -400,6 +400,25 @@
                         background-color: #ff6040; /* Active state background color */
                         color: white; /* Active state text color */
                         }
+                        /* Container Styling */
+                        .container.properties {
+                        position: relative;
+                        overflow: hidden;
+                        }
+
+                        /* Card Animation */
+                        .card {
+                        opacity: 0;
+                        transform: translateY(250px);
+                        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+                        animation-fill-mode: both; /* Ensures the delay is respected */
+                        }
+
+                        .card.visible {
+                        opacity: 1;
+                        transform: translateY(0);
+                        }
+
 
                     </style>
 
@@ -595,6 +614,38 @@
                         filterMenu.classList.remove('show');
                         }
                         });
+                        });
+
+
+                        document.addEventListener("DOMContentLoaded", function () {
+                        const cards = document.querySelectorAll(".card");
+
+                        // Apply animation delay dynamically based on the index
+                        cards.forEach((card, index) => {
+                        card.style.animationDelay = `${0.1 * (index + 1)}s`; // Delay increases by 0.1s per card
+                        });
+
+                        // Observer options
+                        const observerOptions = {
+                        root: null, // Viewport as the root
+                        threshold: 0.2, // 20% of the card must be visible
+                        };
+
+                        // Callback function for IntersectionObserver
+                        const observerCallback = (entries, observer) => {
+                        entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                        entry.target.classList.add("visible"); // Add the 'visible' class
+                        observer.unobserve(entry.target); // Stop observing this card
+                        }
+                        });
+                        };
+
+                        // Create an IntersectionObserver
+                        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+                        // Observe each card
+                        cards.forEach(card => observer.observe(card));
                         });
 
                     </script>

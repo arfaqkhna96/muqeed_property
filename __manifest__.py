@@ -21,6 +21,7 @@
         'views/email_template.xml',
         'views/form_template.xml',
         'views/contactus.xml',
+        'views/thanks_template.xml',  # Add the path to your thanks template
         'views/menu.xml',
 
     ],

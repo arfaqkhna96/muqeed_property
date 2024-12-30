@@ -109,6 +109,10 @@ class ContactUs(http.Controller):
     def contact_us(self, **kwargs):
         return request.render('muqeed_property.contact_us_template')
 
+    @http.route('/contact/thanks', type='http', auth='public', website=True)
+    def thanks_page(self, **kwargs):
+        return request.render('muqeed_property.thanks_template')
+
     @http.route('/contact/submit', type='http', auth='public', website=True, csrf=False)
     def submit_contact(self, **kwargs ):
         # Process form data
@@ -126,3 +130,6 @@ class ContactUs(http.Controller):
         })
 
         return request.redirect('/contact/thanks')
+
+
+

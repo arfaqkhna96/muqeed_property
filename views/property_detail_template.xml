@@ -456,7 +456,7 @@
 
                         // Observe each card
                         cards.forEach(card => observer.observe(card));
-                        }); 
+                        });
                         <!--                        odoo.define('muqeed_property.navbar', function (require) {-->
                         <!--                        "use strict";-->
 

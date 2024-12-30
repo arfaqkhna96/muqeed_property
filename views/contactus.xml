@@ -106,18 +106,20 @@
                 font-size: 24px; /* Adjust font size for mobile */
                 }
                 }
-                .btn_message{
-                background: linear-gradient(to right, #ff5c40, #ff8340);
-                color:white;
-                padding: 10px 20px; /* Add padding for a better button size */
-                font-size: 16px; /* Larger font size */
-                font-weight: bold; /* Emphasize the button */
-                border-radius: 25px; /* Rounded button corners */
-                border:none;
-                }
-                .btn_message:hover{
-                background: linear-gradient(to left, #ff5c40, #ff8340);
-                }
+               .btn_message {
+    background: linear-gradient(to right, #ff5c40, #ff8340);
+    color: white;
+    padding: 10px 20px; /* Add padding for a better button size */
+    font-size: 16px; /* Larger font size */
+    font-weight: bold; /* Emphasize the button */
+    border-radius: 25px; /* Rounded button corners */
+    border: none;
+    transition: background 1s ease; /* Smooth transition for background */
+}
+
+.btn_message:hover {
+    background: linear-gradient(to left, #ff5c40, #ff8340);
+}
 
             </style>
             <div class="contact-us-banner"

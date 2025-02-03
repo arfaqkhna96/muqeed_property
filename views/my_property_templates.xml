@@ -1,0 +1,1011 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="my_property_template" name="My Property Page">
+            <t t-call="website.layout">
+                <xpath expr="." position="inside">
+                    <style>
+                        /* General Minimalist Styling */
+                        body {
+                        font-family: 'Helvetica', sans-serif;
+                        background-color: #f4f7f6; /* Light background for contrast */
+                        color: #333; /* Dark text for readability */
+                        }
+                        .navbar-nav .nav-link.active, .navbar-nav .show .nav-link {
+                        border-bottom: 2px solid #FF6040;
+                        }
+
+                        .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+                        color:#FF6040;!important
+                        }
+
+                        /* Button Styles */
+                        .btn {
+                        /* Green background */
+                        color: #fff; /* White text */
+                        border: none;
+                        border-radius: 5px; /* Rounded corners */
+                        padding: 10px 15px; /* Padding for button */
+                        transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+                        cursor: pointer; /* Pointer cursor on hover */
+                        }
+
+                        .btn:hover {
+                        <!--                        background-color: #ff6040; /* Darker green on hover */-->
+                        transform: translateY(-2px); /* Slight lift effect */
+                        }
+                        .btn:active {
+                        background-color: #ff6040;
+                        color: white; /* Optional: Adjust text color for better contrast */
+                        }
+
+                        /* Filter Sidebar Styling */
+                        .filter-sidebar {
+                        background-color: #fff; /* White background */
+                        border-radius: 8px; /* Rounded corners */
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                        padding: 20px; /* Padding */
+                        margin-top: 20px; /* Margin */
+                        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+                        }
+
+                        .filter-sidebar:hover {
+                        transform: translateY(-5px); /* Lift effect on hover */
+                        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+                        }
+
+                        /* Form Control Styles */
+                        .form-control {
+                        border-radius: 8px; /* Rounded corners */
+                        border: 1px solid #ddd; /* Light border */
+                        padding: 10px; /* Padding */
+                        transition: border-color 0.3s ease; /* Smooth transition */
+                        }
+
+                        .form-control:focus {
+                        border-color: #ff6040; /* Green border on focus */
+                        outline: none; /* Remove outline */
+                        }
+
+
+                        /* Dropdown Styles */
+                        .filter-dropdown {
+                        appearance: none; /* Remove default styling */
+                        -webkit-appearance: none; /* Remove default styling for Safari */
+                        -moz-appearance: none; /* Remove default styling for Firefox */
+                        background-color: #f4f4f4; /* Light background */
+                        border: 1px solid #ddd; /* Light border */
+                        border-radius: 5px; /* Rounded corners */
+                        padding: 10px 20px; /* Padding */
+                        width: 100%; /* Full width */
+                        font-size: 1rem; /* Font size */
+                        color: #333; /* Dark text */
+                        transition: all 0.3s ease; /* Smooth transition */
+                        outline: none; /* Remove outline */
+                        }
+
+                        /* Hover effect for dropdowns */
+                        .filter-dropdown:hover {
+                        background-color: #e2e2e2; /* Darker background on hover */
+                        border-color: #bbb; /* Darker border on hover */
+                        }
+
+                        /* Focus effect for dropdowns */
+                        .filter-dropdown:focus {
+                        background-color: #fff; /* White background on focus */
+                        border-color: #666; /* Darker border on focus */
+                        box-shadow: 0 0 5px rgba(102, 102, 102, 0.5); /* Shadow on focus */
+                        transition: all 0.2s ease-in-out; /* Smooth transition */
+                        }
+
+                        /* Placeholder style (if any) */
+                        .filter-dropdown option {
+                        color: #666; /* Light gray for placeholder */
+                        }
+
+                        /* Subtle slide-in animation when the dropdown is focused */
+                        .filter-dropdown {
+                        animation: slideIn 0.3s ease-out; /* Slide-in animation */
+                        }
+
+                        /* Animation for the dropdown */
+                        @keyframes slideIn {
+                        from {
+                        transform: translateY(-20px); /* Start above */
+                        opacity: 0; /* Start transparent */
+                        }
+                        to {
+                        transform: translateY(0); /* End at original position */
+                        opacity: 1; /* End fully visible */
+                        }
+                        }
+
+                        /* Header Styles */
+                        h4.text-center {
+                        font-size: 1.5rem; /* Font size */
+                        font-weight: bold; /* Bold text */
+                        color: #333; /* Dark text */
+                        margin-bottom: 20px; /* Spacing below */
+                        letter-spacing: 1px; /* Spacing between letters */
+                        transition: color 0.3s ease; /* Smooth transition */
+                        }
+
+                        /* Hover effect for the header */
+                        h4.text-center:hover {
+                        color: #555; /* Darker color on hover */
+                        }
+
+                        /* Carousel Styles */
+                        .card{
+                        background-color: #fff; /* White background */
+                        padding: 0px; /* Padding */
+                        border-radius: 8px; /* Rounded corners */
+                        transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth
+                        transitions
+                        */
+                        box-shadow: 4px 4px 10px rgba(128, 128, 128, 0.3);
+                        }
+
+                        .card:hover {
+                        background-color: #f9f9f9; /* Light background on hover */
+                        box-shadow: 16px 16px 40px rgba(128, 128, 128, 0.5); /* More visible shadow on hover */
+                        transform: scale(1.05);
+                        }
+
+                        .card:hover .card-title {
+                        color: #ff6040 !important; /* Change title color on hover */
+                        }
+                        .card .price{
+                        color: #ff6040 !important; /* Change title color on hover */
+                        }
+
+                        .card.card-title {
+                        transition: color 0.5s ease; /* Smooth transition for title color */
+                        }
+
+                        .icon-container .icon-item {
+                        display: flex;
+                        flex-direction:row;
+                        align-items: center;
+                        justify-content: center;
+                        width: 100%; /* Fixed width for consistent spacing */
+                        }
+
+                        .icon-container .icon-item svg {
+
+                        margin-bottom: 5px; /* Space between icon and label */
+                        }
+                        .card:hover .icon-item svg{
+                        color: #ff6040; /* Icon color */
+                        }
+
+                        .icon-container .icon-item p {
+                        font-size: 16px; /* Label size */
+                        color: #555; /* Label color */
+                        }
+
+                        .icon-container .icon-item + .icon-item {
+                        padding-left: 5px;
+                        padding-right: 5px;/* Space between icons */
+                        }
+                        .sale_type {
+                        position: absolute;
+                        top: 15px;
+                        left: 80%;
+                        background-color:#f2353c; /* Semi-transparent background */
+                        color: white;
+                        font-size: 12px;
+                        font-weight: bold;
+                        padding: 5px 15px;
+                        border-radius: 7px;
+                        z-index: 10; /* Ensure it appears above the carousel images */
+                        text-transform: capitalize; /* Optional: Make the text title-case */
+                        }
+
+
+                        /* Carousel Container */
+                        .carousel {
+                        position: relative;
+                        }
+
+                        /* Navigation Buttons */
+                        .custom-carousel-control {
+                        position: absolute;
+                        filter: none;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: #ffffff;
+                        background-color:#ff6040; /* Background with opacity */
+                        border: none;
+                        border-radius: 50%;
+                        padding:5px;
+                        width: 20px;
+                        height: 20px;
+                        display: none; /* Initially hidden */
+                        justify-content: center;
+                        align-items: center;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        }
+
+                        .custom-carousel-control .custom-icon {
+                        color: #ffffff; /* White arrow */
+                        font-size: 24px;
+                        font-weight: 900;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        }
+
+                        /* Show buttons on hover */
+                        .card:hover .custom-carousel-control {
+                        display: flex;
+                        }
+
+                        /* Position for Prev/Next Buttons */
+                        .carousel-control-prev {
+
+                        left: 10px;
+                        }
+
+                        .carousel-control-next {
+                        right: 10px;
+                        }
+
+                        /* Button Hover Effect */
+                        .custom-carousel-control:hover {
+                        background-color: #ff6040; /* Darker shade on hover */
+                        }
+
+                        /* Carousel Image Styling */
+                        .carousel img {
+                        object-fit: cover;
+                        width: 100%;
+                        height: 250px;
+                        }
+                        .details{
+                        display:flex;
+                        padding: 5px 10px;
+                        border: 1px dotted black;
+                        border-radius: 20px;
+
+
+                        justify-content:center;
+                        align-item:center;
+                        }
+
+                        .card :hover .details{
+                        background-color: #ff6040;
+                        border:1px dotted #ff6040;
+                        transition: all 0.1s ease;
+                        color: white;
+                        }
+                        .card:hover.detail_nav{
+                        color: #ff6040 !important;
+                        }
+                        .date{
+                        display: flex;
+                        font-size:16px;
+                        font-weight:500;
+
+                        }
+                        .city {
+                        text-transform: uppercase; /* Converts all text to uppercase */
+                        letter-spacing: 2px; /* Adds extra space between letters */
+                        }
+                        /* Price Range Slider */
+                        .slider-container-price {
+                        position: relative;
+                        width: 100%;
+                        height: 10px;
+                        background-color: #ccc;
+                        margin-top: 10px;
+                        }
+
+                        .slider-track-price {
+                        position: absolute;
+                        top: 0;
+                        height: 10px;
+                        background-color: #ff6040;
+                        }
+
+                        .slider-handle {
+                        position: absolute;
+                        top: -5px;
+                        width: 20px;
+                        height: 20px;
+                        background-color:#ff6040;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        }
+
+                        /* Area Range Slider */
+                        .slider-container-area {
+                        position: relative;
+                        width: 100%;
+                        height: 10px;
+                        background-color: #ccc;
+                        margin-top: 10px;
+                        }
+
+                        .slider-track-area {
+                        position: absolute;
+                        top: 0;
+                        height: 10px;
+                        background-color: #ff6040;
+                        }
+
+                        .slider-handle {
+                        position: absolute;
+                        top: -5px;
+                        width: 20px;
+                        height: 20px;
+                        background-color: #ff6040;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        }
+                        /* Filter Sidebar for Desktop */
+                        .filter-sidebar {
+                        background-color: #f8f9fa;
+                        padding: 20px;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        position: sticky;
+                        top: 20px; /* Keeps the filter fixed while scrolling */
+                        }
+
+                        /* Sliding menu for Mobile (already defined previously) */
+                        .filter-menu {
+                        position: fixed;
+                        top: 0;
+                        right: -100%;
+                        height: 100%;
+                        width: 80%;
+                        max-width: 400px;
+                        background-color: #343a40;
+                        color: white;
+                        padding: 20px;
+                        z-index: 1050;
+                        transition: right 0.3s ease-in-out;
+                        overflow-y: auto;
+                        }
+
+                        .filter-menu.show {
+                        right: 0;
+                        }
+
+                        /* Close button */
+                        .btn-close {
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        }
+
+                        /* Filter button for Mobile */
+                        #filterToggleBtn {
+                        background-color: #ff6040;
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        z-index: 1100;
+                        border-radius: 15px;
+                        width: 60px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                        }
+                        #filterToggleBtn.active {
+                        background-color: #ff6040; /* Active state background color */
+                        color: white; /* Active state text color */
+                        }
+                        /* Container Styling */
+                        .container.properties {
+                        position: relative;
+                        overflow: hidden;
+                        }
+
+                        /* Card Animation */
+                        .card {
+                        opacity: 0;
+                        transform: translateY(100px);
+                        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+                        animation-fill-mode: both; /* Ensures the delay is respected */
+                        }
+
+                        .card.visible {
+                        opacity: 1;
+                        transform: translateY(0);
+                        }
+                        .card.visible:hover {
+                        opacity: 1;
+                        transform: scale(1.02);
+                        }
+
+                    </style>
+
+                    <script>
+                        let salesType = "all"; // Initialize salesType
+                        let propType = "all"; // Initialize propType
+
+                        function handleSalesTypeChange(selectElement) {
+                        salesType = selectElement.value; // Update salesType
+                        updateSelections(); // Update selected values
+                        }
+
+                        function handlePropertyTypeChange(selectElement) {
+                        propType = selectElement.value; // Update propType
+                        updateSelections(); // Update selected values
+                        }
+
+                        function updateSelections() {
+                        // Update the selected values of the dropdowns based on the current variables
+                        const salesSelect = document.getElementById('sales_type');
+                        const propertySelect = document.getElementById('property_type');
+
+                        // Set the selected value for sales type
+                        Array.from(salesSelect.options).forEach(option => {
+                        option.selected = (option.value === salesType);
+                        });
+
+                        // Set the selected value for property type
+                        Array.from(propertySelect.options).forEach(option => {
+                        option.selected = (option.value === propType);
+                        });
+                        }
+
+                        function handleSubmit(e) {
+                        e.preventDefault(); // Prevent the default form submission behavior
+                        // Create the URL with all the necessary query parameters
+                        const url = `/properties?sales=${salesType}&amp;prop=${propType}&amp;min=${minValue}&amp;max=${maxValue}&amp;minArea=${minAreaValue}&amp;maxArea=${maxAreaValue}`;
+                        console.log(`Redirecting to: ${url}`); // Log the URL for debugging
+                        window.location.href = url; // Redirect to the new URL with the area filter
+                        }
+
+                        let maxValue;
+                        let minValue;
+                        let minAreaValue;
+                        let maxAreaValue;
+                        document.addEventListener('DOMContentLoaded', function () {
+                        // Price Range Slider
+                        const priceStart = document.getElementById('priceStart');
+                        const priceEnd = document.getElementById('priceEnd');
+                        const handleMin = document.getElementById('handleMin');
+                        const handleMax = document.getElementById('handleMax');
+                        const priceStartLabel = document.getElementById('priceStartLabel');
+                        const priceEndLabel = document.getElementById('priceEndLabel');
+
+                        const sliderContainerPrice = document.querySelector('.slider-container-price');
+                        const sliderTrackPrice = document.querySelector('.slider-track-price');
+
+                        let isDraggingMin = false;
+                        let isDraggingMax = false;
+                        const sliderWidthPrice = sliderContainerPrice.offsetWidth;
+
+                        function updatePriceSlider() {
+                        minValue = parseInt(priceStart.value);
+                        maxValue = parseInt(priceEnd.value);
+
+                        handleMin.style.left = `${(minValue /  100000) * 95}%`;
+                        handleMax.style.left = `${(maxValue /  100000) * 95}%`;
+
+                        sliderTrackPrice.style.left = `${(minValue /  100000) * 95}%`;
+                        sliderTrackPrice.style.width = `${((maxValue - minValue) /  100000) * 95}%`;
+
+                        priceStartLabel.textContent = `₹${minValue}`;
+                        priceEndLabel.textContent = `₹${maxValue}`;
+                        }
+
+                        handleMin.addEventListener('mousedown', () => { isDraggingMin = true; });
+                        handleMax.addEventListener('mousedown', () => { isDraggingMax = true; });
+
+                        window.addEventListener('mousemove', (e) => {
+                        if (isDraggingMin || isDraggingMax) {
+                        const sliderRect = sliderContainerPrice.getBoundingClientRect();
+                        const offsetX = e.clientX - sliderRect.left;
+                        const percentage = Math.min(Math.max(0, offsetX / sliderWidthPrice), 1);
+
+                        if (isDraggingMin) {
+                        const newMinValue = Math.round(percentage * 100000);
+                        if (newMinValue&lt; parseInt(priceEnd.value)) {
+                        priceStart.value = newMinValue;
+                        updatePriceSlider();
+                        }
+                        }
+
+                        if (isDraggingMax) {
+                        const newMaxValue = Math.round(percentage * 100000);
+                        if (newMaxValue > parseInt(priceStart.value)) {
+                        priceEnd.value = newMaxValue;
+                        updatePriceSlider();
+                        }
+                        }
+                        }
+                        });
+
+                        window.addEventListener('mouseup', () => {
+                        isDraggingMin = false;
+                        isDraggingMax = false;
+                        });
+
+                        updatePriceSlider(); // Initial update
+
+
+                        // Area Range Slider
+                        const handleAreaMin = document.getElementById('handleAreaMin');
+                        const handleAreaMax = document.getElementById('handleAreaMax');
+                        const areaStartLabel = document.getElementById('areaStartLabel');
+                        const areaEndLabel = document.getElementById('areaEndLabel');
+                        const areaStart = document.getElementById('areaStart');
+                        const areaEnd = document.getElementById('areaEnd');
+                        const sliderContainerArea = document.querySelector('.slider-container-area');
+                        const sliderTrackArea = document.querySelector('.slider-track-area');
+
+                        let isDraggingAreaMin = false;
+                        let isDraggingAreaMax = false;
+                        const sliderWidthArea = sliderContainerArea.offsetWidth;
+
+                        function updateAreaSlider() {
+                        minAreaValue = parseInt(areaStart.value);
+                        maxAreaValue = parseInt(areaEnd.value);
+
+                        handleAreaMin.style.left = `${(minAreaValue / 5000) * 95}%`;
+                        handleAreaMax.style.left = `${(maxAreaValue / 5000) * 95}%`;
+
+                        sliderTrackArea.style.left = `${(minAreaValue / 5000) * 95}%`;
+                        sliderTrackArea.style.width = `${((maxAreaValue - minAreaValue) / 5000) * 95}%`;
+
+                        areaStartLabel.textContent = `${minAreaValue} sq ft`;
+                        areaEndLabel.textContent = `${maxAreaValue} sq ft`;
+                        }
+
+                        handleAreaMin.addEventListener('mousedown', () => { isDraggingAreaMin = true; });
+                        handleAreaMax.addEventListener('mousedown', () => { isDraggingAreaMax = true; });
+
+                        window.addEventListener('mousemove', (e) => {
+                        if (isDraggingAreaMin || isDraggingAreaMax) {
+                        const sliderRect = sliderContainerArea.getBoundingClientRect();
+                        const offsetX = e.clientX - sliderRect.left;
+                        const percentage = Math.min(Math.max(0, offsetX / sliderWidthArea), 1);
+
+                        if (isDraggingAreaMin) {
+                        const newMinAreaValue = Math.round(percentage * 5000);
+                        if (newMinAreaValue&lt; parseInt(areaEnd.value)) {
+                        areaStart.value = newMinAreaValue;
+                        updateAreaSlider();
+                        console.log(minAreaValue);
+                        }
+                        } 
+
+                        if (isDraggingAreaMax) {
+                        const newMaxAreaValue = Math.round(percentage * 5000);
+                        if (newMaxAreaValue > parseInt(areaStart.value)) {
+                        areaEnd.value = newMaxAreaValue;
+                        updateAreaSlider();
+                        console.log(maxAreaValue);
+                        }
+                        }
+                        }
+                        });
+
+                        window.addEventListener('mouseup', () => {
+                        isDraggingAreaMin = false;
+                        isDraggingAreaMax = false;
+                        });
+
+                        updateAreaSlider(); // Initial update
+
+                        });
+
+   document.addEventListener('DOMContentLoaded', () => {
+    const filterMenu = document.getElementById('filterMenu');
+    const filterToggleBtn = document.getElementById('filterToggleBtn');
+    const closeFilterMenu = document.getElementById('closeFilterMenu');
+    const mainMenu = document.getElementById('mainMenu');
+    const mainMenuToggleBtn = document.getElementById('mainMenuToggleBtn');
+
+    // Open the filter menu
+    filterToggleBtn.addEventListener('click', () => {
+        filterMenu.classList.add('show');
+        filterToggleBtn.style.display = 'none'; // Hide the filter button
+    });
+
+    // Close the filter menu
+    closeFilterMenu.addEventListener('click', () => {
+        filterMenu.classList.remove('show');
+        filterToggleBtn.style.display = 'block'; // Show the filter button
+    });
+
+    // Close the menu if clicked outside
+    document.addEventListener('click', (event) => {
+        if (
+            !filterMenu.contains(event.target) &amp;&amp;
+            !filterToggleBtn.contains(event.target) &amp;&amp;
+            filterMenu.classList.contains('show')
+        ) {
+            filterMenu.classList.remove('show');
+            filterToggleBtn.style.display = 'block'; // Show the filter button
+        }
+    });
+
+    // Hide filter button when main menu is opened
+    mainMenuToggleBtn.addEventListener('click', () => {
+        if (mainMenu.classList.contains('show')) {
+            mainMenu.classList.remove('show'); // Close main menu if open
+            filterToggleBtn.style.display = 'block'; // Show filter button
+        } else {
+            mainMenu.classList.add('show'); // Open main menu
+            filterToggleBtn.style.display = 'none'; // Hide filter button
+        }
+    });
+
+    // Close the main menu if clicked outside
+    document.addEventListener('click', (event) => {
+        if (
+            !mainMenu.contains(event.target) &amp;&amp;
+            !mainMenuToggleBtn.contains(event.target) &amp;&amp;
+            mainMenu.classList.contains('show')
+        ) {
+            mainMenu.classList.remove('show');
+            filterToggleBtn.style.display = 'block'; // Show filter button
+        }
+    });
+});
+
+
+
+                        document.addEventListener("DOMContentLoaded", function () {
+                        const cards = document.querySelectorAll(".card");
+
+                        // Apply animation delay dynamically based on the index
+                        cards.forEach((card, index) => {
+                        card.style.animationDelay = `${0.1 * (index + 1)}s`; // Delay increases by 0.1s per card
+                        });
+
+                        // Observer options
+                        const observerOptions = {
+                        root: null, // Viewport as the root
+                        threshold: 0.2, // 20% of the card must be visible
+                        };
+
+                        // Callback function for IntersectionObserver
+                        const observerCallback = (entries, observer) => {
+                        entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                        entry.target.classList.add("visible"); // Add the 'visible' class
+                        observer.unobserve(entry.target); // Stop observing this card
+                        }
+                        });
+                        };
+
+                        // Create an IntersectionObserver
+                        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+                        // Observe each card
+                        cards.forEach(card => observer.observe(card));
+                        });
+
+                    </script>
+                </xpath>
+
+                <div class="container">
+                    <div class="row">
+                        <!-- Static Filter Sidebar for Desktop -->
+                        <div class="col-md-3 d-none d-md-block p-none">
+                            <div class="filter-sidebar">
+                                <h4>Request Exploration</h4>
+                                <form>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="inputField1"
+                                               placeholder="Your Name"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="inputField2"
+                                               placeholder="Email Address"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="text" class="form-control" id="inputField3"
+                                               placeholder="Mobile Number"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <textarea class="form-control" id="textAreaField" rows="3"
+                                                  placeholder="Message"/>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+                                </form>
+                                <br/>
+                                <h4>Filter</h4>
+                                <form>
+                                    <div class="mb-3">
+                                        <select class="form-select filter-dropdown" id="sales_type"
+                                                onchange="handleSalesTypeChange(this)">
+                                            <option value="all" t-att-selected="'all' == salesType">All Properties
+                                            </option>
+                                            <option value="rent" t-att-selected="'rent' == salesType">For Rent</option>
+                                            <option value="sale" t-att-selected="'sale' == salesType">For Sale</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <select class="form-select filter-dropdown" id="property_type"
+                                                onchange="handlePropertyTypeChange(this)">
+                                            <option value="all" t-att-selected="'all' == propType">All Properties
+                                            </option>
+                                            <option value="vacant_land" t-att-selected="'vacant_land' == propType">
+                                                Vacant Land
+                                            </option>
+                                            <option value="villa" t-att-selected="'villa' == propType">Villa</option>
+                                            <option value="house" t-att-selected="'house' == propType">House</option>
+                                            <option value="commercial_space"
+                                                    t-att-selected="'commercial_space' == propType">Commercial Space
+                                            </option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="container">
+                                        <div class="mb-3">
+                                            <label class="form-label">Price Range:</label>
+                                            <div class="d-flex justify-content-between">
+                                                <span id="priceStartLabel">₹0</span>
+                                                <span id="priceEndLabel">₹1,00,000</span>
+                                            </div>
+                                            <div class="slider-container-price">
+                                                <div class="slider-track-price"/>
+                                                <div class="slider-handle" id="handleMin" style="left: 0;"/>
+                                                <div class="slider-handle" id="handleMax" style="left: 95%;"/>
+                                                <input type="hidden" id="priceStart" value="0"/>
+                                                <input type="hidden" id="priceEnd" value=" 100000"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container">
+                                        <div class="mb-3">
+                                            <label class="form-label">Area Range (sq ft):</label>
+                                            <div class="d-flex justify-content-between">
+                                                <span id="areaStartLabel">0</span>
+                                                <span id="areaEndLabel">5000</span>
+                                            </div>
+                                            <div class="slider-container-area">
+                                                <div class="slider-track-area"/>
+                                                <div class="slider-handle" id="handleAreaMin" style="left: 0;"/>
+                                                <div class="slider-handle" id="handleAreaMax" style="left: 95%;"/>
+                                                <input type="hidden" id="areaStart" value="0"/>
+                                                <input type="hidden" id="areaEnd" value="5000"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="button" onclick="handleSubmit(event)" class="btn btn-primary w-100">
+                                        Search
+                                    </button>
+
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-md-9 p-none">
+                            <div class="container mb-5">
+                                <h2 class="mb-2 text-left">Available Properties</h2>
+                                <div class="row g-4">
+                                    <t t-foreach="properties" t-as="property">
+                                        <div class="col-lg-4 col-md-4">
+                                            <div class="card h-100 ">
+                                                <!-- Bootstrap Carousel -->
+                                                <div class="carousel slide"
+                                                     t-att-id="'carousel-property-' + str(property.id)"
+                                                     data-bs-ride="carousel">
+                                                    <span class="sale_type">
+                                                        <t t-esc="property.sales_type"/>
+                                                    </span>
+                                                    <div class="carousel-inner">
+                                                        <t t-set="counter" t-value="0"/>
+                                                        <t t-foreach="property.image_ids" t-as="image">
+                                                            <div t-att-class="'carousel-item ' + ('active' if counter == 0 else '')">
+                                                                <img t-att-src="'/web/image/property.image/%d/image' % image.id"
+                                                                     class="d-block w-100"
+                                                                     alt="Property Image"
+                                                                     style="object-fit: cover; height: 250px;"/>
+                                                            </div>
+                                                            <t t-set="counter" t-value="counter + 1"/>
+                                                        </t>
+                                                    </div>
+
+                                                    <!-- Navigation Buttons -->
+                                                    <button class="carousel-control-prev custom-carousel-control"
+                                                            type="button"
+                                                            t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                                            data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon custom-icon"/>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next custom-carousel-control"
+                                                            type="button"
+                                                            t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                                            data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon custom-icon"
+                                                              aria-hidden="true"/>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+
+                                                </div>
+                                                <!-- Card Body -->
+                                                <div class="card-body">
+                                                    <h6 class="city font-montserrat text-muted ">
+                                                        <t t-esc="property.city"/>
+                                                    </h6>
+                                                    <h4 class="card-title font-montserrat ">
+                                                        <t t-esc="property.name"/>
+                                                    </h4>
+                                                    <h6 class="price">
+                                                        Amount: ₹
+                                                        <t t-esc="property.amount"/>
+                                                        *
+                                                    </h6>
+                                                    <p class="card-text text-muted font-roboto">
+                                                        <t t-esc="property.description"/>
+                                                    </p>
+
+                                                    <div class="icon-container mt-3 d-flex align-items-center text-muted ">
+                                                        <!-- Double Bed Icon -->
+                                                        <div class="icon-item pe-3 border-end text-center ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="22"
+                                                                 height="18"
+                                                                 fill="currentColor" viewBox="0 0 22 18">
+                                                                <path d="M22 10V6c0-2.2-1.8-4-4-4H6C3.8 2 2 3.8 2 6v4H1v8h1v3h2v-3h14v3h2v-3h1v-8h-1zm-14 6H4v-3h4v3zm10 0h-4v-3h4v3zm0-5H4V6c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v5z"/>
+                                                            </svg>
+                                                            <p class="small mb-1">Bed:
+                                                                <t t-esc="property.bedrooms"/>
+                                                            </p>
+                                                        </div>
+                                                        <!-- Bathroom Icon -->
+                                                        <div class="icon-item pe-3 border-end text-center ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="22"
+                                                                 height="18"
+                                                                 fill="currentColor" viewBox="0 0 22 18">
+                                                                <path d="M22 14H6V7.7c1.1.8 2.5 1.3 4 1.3 3.3 0 6-2.7 6-6h2c0 4.4-3.6 8-8 8-1.5 0-3-.4-4.2-1.1L6 9v5H2v6h20v-6zM6 19v-3h2v3H6zm10 0v-3h2v3h-2z"/>
+                                                            </svg>
+                                                            <p class="small mb-1">Baths:
+                                                                <t t-esc="property.bathrooms"/>
+                                                            </p>
+                                                        </div>
+                                                        <!-- Square Ruler Icon -->
+                                                        <div class="icon-item text-center ">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="22"
+                                                                 height="18"
+                                                                 fill="currentColor" viewBox="0 0 22 18">
+                                                                <path d="M21 6l-1.4-1.4L16.5 7.7l-1.8-1.8 3.1-3.1L16.5 2 5 13.5V19h5.5L21 6zm-11.9 9.5l7.4-7.4.7.7-7.4 7.4H9v-.7zm10.1-.7l-3.1 3.1 1.4 1.4L22 16.5 19.2 13.7zm-6.4 1.4l.7.7-3.1 3.1H5v-2.2l7.4-7.4z"/>
+                                                            </svg>
+                                                            <p class="small mb-1">Sq Ft:
+                                                                <t t-esc="property.property_area"/>
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="d-flex mt-3 justify-content-between align-items-center">
+                                                        <p class="date text-muted ">
+                                                            <t t-esc="property.write_date.strftime('%B %d, %Y')"/>
+                                                        </p>
+                                                        <div>
+                                                            <a t-att-href="'/property/detail/' + str(property.id)"
+                                                               class="detail_nav text-decoration-none text-muted  d-block">
+                                                                <p class="details">
+                                                                    Details
+                                                                </p>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Sliding Filter Menu for Mobile -->
+                        <button id="filterToggleBtn" class="btn btn-outline-primary d-md-none">
+                            Filter
+                        </button>
+                        <div id="filterMenu" class="filter-menu">
+                            <button id="closeFilterMenu" class="btn-close btn-close-white"/>
+                            <h4>Request Exploration</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="inputField1" placeholder="Your Name"/>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="inputField2"
+                                           placeholder="Email Address"/>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="inputField3"
+                                           placeholder="Mobile Number"/>
+                                </div>
+                                <div class="mb-3">
+                                    <textarea class="form-control" id="textAreaField" rows="3"
+                                              placeholder="Message"/>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+                            </form>
+                            <br/>
+                            <h4>Filter</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <select class="form-select filter-dropdown" id="sales_type"
+                                            onchange="handleSalesTypeChange(this)">
+                                        <option value="all" t-att-selected="'all' == salesType">All Properties
+                                        </option>
+                                        <option value="rent" t-att-selected="'rent' == salesType">For Rent</option>
+                                        <option value="sale" t-att-selected="'sale' == salesType">For Sale</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <select class="form-select filter-dropdown" id="property_type"
+                                            onchange="handlePropertyTypeChange(this)">
+                                        <option value="all" t-att-selected="'all' == propType">All Properties
+                                        </option>
+                                        <option value="vacant_land" t-att-selected="'vacant_land' == propType">
+                                            Vacant Land
+                                        </option>
+                                        <option value="villa" t-att-selected="'villa' == propType">Villa</option>
+                                        <option value="house" t-att-selected="'house' == propType">House</option>
+                                        <option value="commercial_space"
+                                                t-att-selected="'commercial_space' == propType">Commercial Space
+                                        </option>
+                                    </select>
+                                </div>
+
+
+                                <div class="container">
+                                    <div class="mb-3">
+                                        <label class="form-label">Price Range:</label>
+                                        <div class="d-flex justify-content-between">
+                                            <span id="priceStartLabel">₹0</span>
+                                            <span id="priceEndLabel">₹1,00,000</span>
+                                        </div>
+                                        <div class="slider-container-price">
+                                            <div class="slider-track-price"/>
+                                            <div class="slider-handle" id="handleMin" style="left: 0;"/>
+                                            <div class="slider-handle" id="handleMax" style="left: 95%;"/>
+                                            <input type="hidden" id="priceStart" value="0"/>
+                                            <input type="hidden" id="priceEnd" value=" 100000"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container">
+                                    <div class="mb-3">
+                                        <label class="form-label">Area Range (sq ft):</label>
+                                        <div class="d-flex justify-content-between">
+                                            <span id="areaStartLabel">0</span>
+                                            <span id="areaEndLabel">10000</span>
+                                        </div>
+                                        <div class="slider-container-area">
+                                            <div class="slider-track-area"/>
+                                            <div class="slider-handle" id="handleAreaMin" style="left: 0;"/>
+                                            <div class="slider-handle" id="handleAreaMax" style="left: 95%;"/>
+                                            <input type="hidden" id="areaStart" value="0"/>
+                                            <input type="hidden" id="areaEnd" value="10000"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" onclick="handleSubmit(event)" class="btn btn-primary w-100">
+                                    Search
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="property_resale_template" name="Property Resale Page">
+        <t t-call="website.layout">
+            <t t-set="title">Property Resale</t>
+            <style>
+                /* General Styles */
+                body {
+                font-family: Montserrat, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f9f9f9;
+                }
+                .navbar-nav .nav-link.active, .navbar-nav .show .nav-link {
+                border-bottom: 2px solid #FF6040;
+                }
+                .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+                color:#FF6040;!important
+                }
+                .card{
+                background-color: #fff; /* White background */
+                padding: 0px; /* Padding */
+                border-radius: 8px; /* Rounded corners */
+                transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transitions
+                */
+                box-shadow: 4px 4px 10px rgba(128, 128, 128, 0.3);
+                }
+                .card:hover {
+                background-color: #f9f9f9; /* Light background on hover */
+                box-shadow: 16px 16px 40px rgba(128, 128, 128, 0.5); /* More visible shadow on hover */
+                transform: scale(1.05);
+                }
+                .card:hover .card-title {
+                color: #ff6040 !important; /* Change title color on hover */
+                }
+                .card .price{
+                color: #ff6040 !important; /* Change title color on hover */
+                }
+                .card.card-title {
+                transition: color 0.5s ease; /* Smooth transition for title color */
+                }
+                .icon-container .icon-item {
+                display: flex;
+                flex-direction:row;
+                align-items: center;
+                justify-content: center;
+                width: 100%; /* Fixed width for consistent spacing */
+                }
+                .icon-container .icon-item svg {
+                margin-bottom: 5px; /* Space between icon and label */
+                }
+                .card:hover .icon-item svg{
+                color: #ff6040; /* Icon color */
+                }
+                .icon-container .icon-item p {
+                font-size: 16px; /* Label size */
+                color: #555; /* Label color */
+                }
+                .icon-container .icon-item + .icon-item {
+                padding-left: 5px;
+                padding-right: 5px;/* Space between icons */
+                }
+                .sale_type {
+                position: absolute;
+                top: 15px;
+                left: 80%;
+                background-color:#f2353c; /* Semi-transparent background */
+                color: white;
+                font-size: 12px;
+                font-weight: bold;
+                padding: 5px 15px;
+                border-radius: 7px;
+                z-index: 10; /* Ensure it appears above the carousel images */
+                text-transform: capitalize; /* Optional: Make the text title-case */
+                }
+                /* Carousel Container */
+                .carousel {
+                position: relative;
+                }
+                /* Navigation Buttons */
+                .custom-carousel-control {
+                position: absolute;
+                filter: none;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #ffffff;
+                background-color:#ff6040; /* Background with opacity */
+                border: none;
+                border-radius: 50%;
+                padding:5px;
+                width: 20px;
+                height: 20px;
+                display: none; /* Initially hidden */
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                }
+                .custom-carousel-control .custom-icon {
+                color: #ffffff; /* White arrow */
+                font-size: 24px;
+                font-weight: 900;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                }
+                /* Show buttons on hover */
+                .card:hover .custom-carousel-control {
+                display: flex;
+                }
+                /* Position for Prev/Next Buttons */
+                .carousel-control-prev {
+                left: 10px;
+                }
+                .carousel-control-next {
+                right: 10px;
+                }
+                /* Button Hover Effect */
+                .custom-carousel-control:hover {
+                background-color: #ff6040; /* Darker shade on hover */
+                }
+                /* Carousel Image Styling */
+                .carousel img {
+                object-fit: cover;
+                width: 100%;
+                height: 250px;
+                }
+                .details{
+                display:flex;
+                padding: 5px 10px;
+                border: 1px dotted black;
+                border-radius: 20px;
+                justify-content:center;
+                align-item:center;
+                }
+                .card :hover .details{
+                color:white !important;
+                background-color: #FF6040;
+                border:1px dotted #FF6040;
+                transition: all 0.1s ease;
+                }
+                .card:hover.detail_nav{
+                color: #ff6040 !important;
+                }
+                .date{
+                display: flex;
+                font-size:16px;
+                font-weight:500;
+
+                }
+                .city {
+                text-transform: uppercase; /* Converts all text to uppercase */
+                letter-spacing: 2px; /* Adds extra space between letters */
+                }
+                <!--                neeraj-->
+                body {
+                position:relative;
+                background-image:
+                url('https://res.cloudinary.com/drw030kab/image/upload/v1734595313/xuouyzyqlsisnscszz33.png');
+                background-size: cover; /* Ensure the image covers the entire container */
+                background-position: center; /* Center the image */
+                background-repeat: no-repeat; /* Avoid repeating the image */
+                display:block;
+                }
+                /* Add a media query to adjust background behavior for smaller screens */
+                @media (max-width: 768px) {
+                body {
+                background-size: contain; /* Use 'contain' to fit the image inside the viewport */
+                background-position: top; /* Align the image to the top */
+                }
+                }
+                @media (max-width: 480px) {
+                body {
+                background-size: cover; /* Maintain cover but focus on center positioning */
+                background-position: center; /* Center the image */
+                }
+                }
+                .properties{
+                <!--                position:absolute;-->
+                }
+                option {
+                background-color: rgb(0,0,0,0.4);
+                }
+                .hero-container {
+                color: white;
+                padding: 20px;
+                position: relative;
+                display: flex;
+                min-height: 100vh;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 20px;
+                }
+                .hero-overlay {
+                background-color: rgba(0, 0, 0, 0.6);
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                }
+                .hero-content {
+                position: relative;
+                z-index: 2;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                }
+                .filter-container {
+                flex: 1;
+                border: 1px solid black;
+                background-color: rgba(0, 0, 0, 0.4);
+                padding: 20px;
+                border-radius: 10px;
+                max-width: 400px;
+                margin: auto;
+                }
+                .slider-container-price {
+                position: relative;
+                width: 100%;
+                height: 6px;
+                background-color: #e0e0e0;
+                border-radius: 3px;
+                }
+                .slider-track-price {
+                position: absolute;
+                height: 100%;
+                background-color: #ff6040;
+                border-radius: 3px;
+                }
+                .slider-handle {
+                position: absolute;
+                top: 50%;
+                width: 16px;
+                height: 16px;
+                background-color:#ff6040;
+                border: 2px solid #ff6040;
+                border-radius: 50%;
+                transform: translate(-50%, -50%);
+                cursor: pointer;
+                }
+                .slider-handle:active {
+                transform: translate(-50%, -50%) scale(1.2);
+                transition: transform 0.1s ease-in-out;
+                }
+                /* Mobile Filter Menu */
+                #mobileFilterMenu {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Initially hidden off-screen */
+                width: 100%;
+                height: 100%;
+                background-color: #fff;
+                z-index: 1050;
+                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+                transition: right 0.3s ease-in-out; /* Sliding effect */
+                overflow-y: auto;
+                }
+                /* Open state for the filter menu */
+                #mobileFilterMenu.open {
+                right: 0; /* Slide into view */
+                }
+                /* Trigger Button for Mobile */
+                #mobileFilterToggle {
+                z-index: 1100;
+                }
+                /* Close Button */
+                #closeMobileFilterMenu {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                }
+                .filter-header{
+                background-color:#FF6040;
+                }
+                /* Ensure it's hidden on larger screens */
+                @media (min-width: 768px) {
+                #mobileFilterMenu {
+                display: none;
+                }
+                #mobileFilterToggle {
+                display: none;
+                }
+                }
+                @media (max-width: 768px) {
+                .filter-container{
+                display:none;
+                }
+                }
+                .container.properties {
+                position: relative;
+                overflow: hidden;
+                }
+                /* Card Animation */
+                .card {
+                opacity: 0;
+                transform: translateY(100px);
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+                }
+                /* Visible State */
+                .card.visible {
+                opacity: 1;
+                transform: translateY(0);
+                }
+                .card.visible:hover {
+                opacity: 1;
+                transform: scale(1.02);
+                }
+            </style>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                // Price Range Slider
+                const priceStart = document.getElementById('priceStart');
+                const priceEnd = document.getElementById('priceEnd');
+                const handleMin = document.getElementById('handleMin');
+                const handleMax = document.getElementById('handleMax');
+                const priceStartLabel = document.getElementById('priceStartLabel');
+                const priceEndLabel = document.getElementById('priceEndLabel');
+                const sliderContainerPrice = document.querySelector('.slider-container-price');
+                const sliderTrackPrice = document.querySelector('.slider-track-price');
+                let isDraggingMin = false;
+                let isDraggingMax = false;
+                const sliderWidthPrice = sliderContainerPrice.offsetWidth;
+                function updatePriceSlider() {
+                const minValue = parseInt(priceStart.value);
+                const maxValue = parseInt(priceEnd.value);
+                handleMin.style.left = `${(minValue / 100000) * 100}%`;
+                handleMax.style.left = `${(maxValue / 100000) * 100}%`;
+                sliderTrackPrice.style.left = `${(minValue / 100000) * 100}%`;
+                sliderTrackPrice.style.width = `${((maxValue - minValue) / 100000) * 100}%`;
+                priceStartLabel.textContent = `₹${minValue}`;
+                priceEndLabel.textContent = `₹${maxValue}`;
+                }
+                handleMin.addEventListener('mousedown', () => { isDraggingMin = true; });
+                handleMax.addEventListener('mousedown', () => { isDraggingMax = true; });
+                window.addEventListener('mousemove', (e) => {
+                if (isDraggingMin || isDraggingMax) {
+                const sliderRect = sliderContainerPrice.getBoundingClientRect();
+                const offsetX = e.clientX - sliderRect.left;
+                const percentage = Math.min(Math.max(0, offsetX / sliderWidthPrice), 1);
+                if (isDraggingMin) {
+                const newMinValue = Math.round(percentage * 100000);
+                if (newMinValue &lt; parseInt(priceEnd.value)) {
+                priceStart.value = newMinValue;
+                updatePriceSlider();
+                }
+                }
+                if (isDraggingMax) {
+                const newMaxValue = Math.round(percentage * 100000);
+                if (newMaxValue > parseInt(priceStart.value)) {
+                priceEnd.value = newMaxValue;
+                updatePriceSlider();
+                }
+                }
+                }
+                });
+                window.addEventListener('mouseup', () => {
+                isDraggingMin = false;
+                isDraggingMax = false;
+                });
+                updatePriceSlider(); // Initial update
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                const filterMenu = document.getElementById('mobileFilterMenu');
+                const filterToggle = document.getElementById('mobileFilterToggle');
+                const closeFilterMenu = document.getElementById('closeMobileFilterMenu');
+                // Function to open the filter menu
+                const openFilterMenu = () => {
+                filterMenu.classList.add('open');
+                filterToggle.style.display = 'none';
+                };
+                // Function to close the filter menu
+                const closeFilterMenuFunc = () => {
+                filterMenu.classList.remove('open');
+                filterToggle.style.display = 'block';
+                };
+                // Event listener for the filter toggle button
+                filterToggle.addEventListener('click', openFilterMenu);
+
+                // Event listener for the close button inside the filter menu
+                closeFilterMenu.addEventListener('click', closeFilterMenuFunc);
+
+                // Optional: Close the filter menu when clicking outside of it
+                document.addEventListener('click', (e) => {
+                if (!filterMenu.contains(e.target) &amp;&amp; !filterToggle.contains(e.target)) {
+                closeFilterMenuFunc();
+                }
+                });
+                });
+
+                document.addEventListener("DOMContentLoaded", function () {
+                const cards = document.querySelectorAll(".card");
+
+                const observerOptions = {
+                root: null, // Use the viewport as the root
+                threshold: 0.1, // Trigger when 10% of the card is visible
+                };
+
+                const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target); // Stop observing once it's visible
+                }
+                });
+                }, observerOptions);
+
+                cards.forEach(card => {
+                observer.observe(card); // Observe each card
+                });
+                });
+            </script>
+            <div class="container hero-container">
+                <div class="row hero-content">
+                    <!-- Header Section -->
+                    <div class="col-12 col-md-6 text-center text-md-start">
+                        <h1 class="fw-bold">Reality Properties Solve Your Problems</h1>
+                        <p>Want to buy or rent Home?</p>
+                    </div>
+
+                    <!-- Filter Section -->
+                    <div class="col-12 col-md-6 filter-container">
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <label for="status" class="form-label text-white">Property Status</label>
+                                <select id="status" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Property Status</option>
+                                    <option>For Rent</option>
+                                    <option>For Sale</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="type" class="form-label text-white">Property Type</label>
+                                <select id="type" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Property Type</option>
+                                    <option>Apartment</option>
+                                    <option>Family House</option>
+                                    <option>Cottage</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <label for="rooms" class="form-label text-white">Max Rooms</label>
+                                <select id="rooms" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Max Rooms</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <!-- Bed and Bath side by side -->
+                            <div class="col-md-6 mb-2">
+                                <label for="beds" class="form-label text-white">Bed</label>
+                                <select id="beds" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Bed</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <label for="bath" class="form-label text-white">Bath</label>
+                                <select id="bath" class="form-control bg-transparent text-white border-white"
+                                        style="border-radius: 7px;">
+                                    <option>Bath</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label">Price Range:</label>
+                                <div class="d-flex justify-content-between">
+                                    <span id="priceStartLabel">₹0</span>
+                                    <span id="priceEndLabel">₹100000</span>
+                                </div>
+                                <div class="slider-container-price">
+                                    <div class="slider-track-price"/>
+                                    <div class="slider-handle" id="handleMin" style="left: -2;"/>
+                                    <div class="slider-handle" id="handleMax" style="left: 98%;"/>
+                                    <input type="hidden" id="priceStart" value="0"/>
+                                    <input type="hidden" id="priceEnd" value="100000"/>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center mt-2">
+                                <button class="btn btn-primary w-100 text-white" style="border-radius: 7px;">Search
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container py-5 properties">
+                <h2 class="mb-5 text-left">Available Properties</h2>
+                <div class="row g-4">
+                    <t t-foreach="properties" t-as="property">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="card h-100 ">
+                                <!-- Bootstrap Carousel -->
+                                <div class="carousel slide" t-att-id="'carousel-property-' + str(property.id)"
+                                     data-bs-ride="carousel">
+                                    <span class="sale_type">
+                                        <t t-esc="property.sales_type"/>
+                                    </span>
+                                    <div class="carousel-inner">
+                                        <t t-set="counter" t-value="0"/>
+                                        <t t-foreach="property.image_ids" t-as="image">
+                                            <div t-att-class="'carousel-item ' + ('active' if counter == 0 else '')">
+                                                <img t-att-src="'/web/image/property.image/%d/image' % image.id"
+                                                     class="d-block w-100"
+                                                     alt="Property Image"
+                                                     style="object-fit: cover; height: 250px;"/>
+                                            </div>
+                                            <t t-set="counter" t-value="counter + 1"/>
+                                        </t>
+                                    </div>
+
+                                    <!-- Navigation Buttons -->
+                                    <button class="carousel-control-prev custom-carousel-control" type="button"
+                                            t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                            data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon custom-icon"/>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next custom-carousel-control" type="button"
+                                            t-att-data-bs-target="'#carousel-property-' + str(property.id)"
+                                            data-bs-slide="next">
+                                        <span class="carousel-control-next-icon custom-icon" aria-hidden="true"/>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <h6 class="city font-montserrat text-muted ">
+                                        <t t-esc="property.city"/>
+                                    </h6>
+                                    <h4 class="card-title font-montserrat ">
+                                        <t t-esc="property.name"/>
+                                    </h4>
+                                    <h6 class="price">
+                                        Amount: ₹
+                                        <t t-esc="property.amount"/>
+                                        *
+                                    </h6>
+                                    <p class="card-text text-muted font-roboto">
+                                        <t t-esc="property.description"/>
+                                    </p>
+
+                                    <div class="icon-container mt-3 d-flex align-items-center text-muted ">
+                                        <!-- Double Bed Icon -->
+                                        <div class="icon-item pe-3 border-end text-center ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18"
+                                                 fill="currentColor" viewBox="0 0 22 18">
+                                                <path d="M22 10V6c0-2.2-1.8-4-4-4H6C3.8 2 2 3.8 2 6v4H1v8h1v3h2v-3h14v3h2v-3h1v-8h-1zm-14 6H4v-3h4v3zm10 0h-4v-3h4v3zm0-5H4V6c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v5z"/>
+                                            </svg>
+                                            <p class="small mb-1">Bed:
+                                                <t t-esc="property.bedrooms"/>
+                                            </p>
+                                        </div>
+                                        <!-- Bathroom Icon -->
+                                        <div class="icon-item pe-3 border-end text-center ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18"
+                                                 fill="currentColor" viewBox="0 0 22 18">
+                                                <path d="M22 14H6V7.7c1.1.8 2.5 1.3 4 1.3 3.3 0 6-2.7 6-6h2c0 4.4-3.6 8-8 8-1.5 0-3-.4-4.2-1.1L6 9v5H2v6h20v-6zM6 19v-3h2v3H6zm10 0v-3h2v3h-2z"/>
+                                            </svg>
+                                            <p class="small mb-1">Baths:
+                                                <t t-esc="property.bathrooms"/>
+                                            </p>
+                                        </div>
+                                        <!-- Square Ruler Icon -->
+                                        <div class="icon-item text-center ">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="18"
+                                                 fill="currentColor" viewBox="0 0 22 18">
+                                                <path d="M21 6l-1.4-1.4L16.5 7.7l-1.8-1.8 3.1-3.1L16.5 2 5 13.5V19h5.5L21 6zm-11.9 9.5l7.4-7.4.7.7-7.4 7.4H9v-.7zm10.1-.7l-3.1 3.1 1.4 1.4L22 16.5 19.2 13.7zm-6.4 1.4l.7.7-3.1 3.1H5v-2.2l7.4-7.4z"/>
+                                            </svg>
+                                            <p class="small mb-1">Sq Ft:
+                                                <t t-esc="property.property_area"/>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                    <div class="d-flex mt-3 justify-content-between align-items-center">
+                                        <p class="date text-muted ">
+                                            <t t-esc="property.write_date.strftime('%B %d, %Y')"/>
+                                        </p>
+                                        <div>
+                                            <a t-att-href="'/property/detail/' + str(property.id)"
+                                               class="detail_nav text-decoration-none text-muted  d-block">
+                                                <p class="details">
+                                                    Details
+                                                </p>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            <!-- Filter Menu for Mobile -->
+            <div id="mobileFilterMenu" class="d-md-none">
+                <div class="filter-header text-white d-flex justify-content-between align-items-center p-3">
+                    <h5 class="mb-0 filter">Filters</h5>
+                    <button id="closeMobileFilterMenu" class="btn-close btn-close-white"/>
+                </div>
+                <div class="filter-body p-3">
+                    <h6 class="text-primary">Request Exploration</h6>
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="mobileInputName" placeholder="Your Name"/>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="mobileInputEmail" placeholder="Email Address"/>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="mobileInputPhone" placeholder="Mobile Number"/>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="mobileMessage" rows="3" placeholder="Message"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Submit Request</button>
+                    </form>
+                    <hr/>
+                    <h6 class="text-primary">Filter</h6>
+                    <form>
+                        <div class="mb-3">
+                            <label for="mobileSalesType" class="form-label">Sales Type</label>
+                            <select class="form-select" id="mobileSalesType" onchange="handleSalesTypeChange(this)">
+                                <option value="all">All Properties</option>
+                                <option value="rent">For Rent</option>
+                                <option value="sale">For Sale</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="mobilePropertyType" class="form-label">Property Type</label>
+                            <select class="form-select" id="mobilePropertyType"
+                                    onchange="handlePropertyTypeChange(this)">
+                                <option value="all">All Properties</option>
+                                <option value="vacant_land">Vacant Land</option>
+                                <option value="villa">Villa</option>
+                                <option value="house">House</option>
+                                <option value="commercial_space">Commercial Space</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="mobilePriceRange" class="form-label">Price Range:</label>
+                            <div class="d-flex justify-content-between">
+                                <span id="mobilePriceStartLabel">₹0</span>
+                                <span id="mobilePriceEndLabel">₹1,00,000</span>
+                            </div>
+                            <div class="slider-container-price">
+                                <div class="slider-track-price"/>
+                                <div class="slider-handle" id="mobileHandleMin" style="left: 0;"/>
+                                <div class="slider-handle" id="mobileHandleMax" style="left: 100%;"/>
+                                <input type="hidden" id="mobilePriceStart" value="0"/>
+                                <input type="hidden" id="mobilePriceEnd" value="100000"/>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="handleSubmit(event)" class="btn btn-primary w-100">
+                            Search
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- Trigger Button for Mobile -->
+            <button id="mobileFilterToggle" class="btn btn-primary d-md-none position-fixed bottom-0 end-0 m-3">
+                Filters
+            </button>
+        </t>
+    </template>
+</odoo>
